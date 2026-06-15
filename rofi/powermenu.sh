@@ -1,35 +1,37 @@
 #!/bin/bash
 
-shutdown="  Shutdown"
-reboot="󰜉  Reboot"
-suspend="󰒲  Suspend"
-logout="󰗽  Logout"
-lock="󰌾  Lock"
-
 # Check if rofi is already running
 if pgrep -x rofi > /dev/null; then
     pkill -x rofi
     exit 0
 fi
 
+# Options with dmenu icon syntax: Label\0icon\x1ficon-name
+shutdown="Shutdown\0icon\x1fsystem-shutdown"
+reboot="Reboot\0icon\x1fsystem-reboot"
+suspend="Suspend\0icon\x1fsystem-suspend"
+logout="Logout\0icon\x1fsystem-log-out"
+lock="Lock\0icon\x1fsystem-lock-screen"
+
 options="$shutdown\n$reboot\n$suspend\n$logout\n$lock"
 
-chosen="$(echo -e "$options" | rofi -dmenu -i -p "Power Menu" -theme ~/.config/rofi/powermenu.rasi)"
+# The chosen variable will only contain the text before \0
+chosen="$(echo -e "$options" | rofi -dmenu -i -p "Power Menu" -show-icons -theme ~/.config/rofi/powermenu.rasi)"
 
 case $chosen in
-    $shutdown)
+    Shutdown)
         systemctl poweroff
         ;;
-    $reboot)
+    Reboot)
         systemctl reboot
         ;;
-    $suspend)
+    Suspend)
         systemctl suspend
         ;;
-    $logout)
+    Logout)
         swaymsg exit
         ;;
-    $lock)
+    Lock)
         swaylock -f -c 1A1B26
         ;;
 esac

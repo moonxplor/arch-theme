@@ -1,11 +1,11 @@
 @import "config.rasi"
 
 window {
-    width: 280px;
+    width: 220px;
     location: northeast;
     anchor: northeast;
-    x-offset: -10px;
-    y-offset: 50px;
+    x-offset: -8px;
+    y-offset: 45px;
     border-radius: 12px;
 }
 
@@ -15,13 +15,13 @@ inputbar {
 
 listview {
     lines: 5;
-    padding: 10px;
+    padding: 5px;
 }
 
 element {
-    padding: 15px;
+    padding: 10px 15px;
 }
 
 element-text {
-    font: "JetBrainsMono Nerd Font 14";
+    font: "JetBrainsMono Nerd Font 13";
 }

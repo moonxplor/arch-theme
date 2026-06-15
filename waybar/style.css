@@ -100,8 +100,7 @@ window#waybar {
 
 #custom-power {
     color: #39c5bb;
-    padding-right: 17px;
-    padding-left: 17px;
+    padding: 0 14px;
 }
 
 #window.empty, window#waybar.empty #window {
