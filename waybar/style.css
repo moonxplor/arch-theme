@@ -1,0 +1,107 @@
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "JetBrainsMono Nerd Font", "Font Awesome 6 Free";
+    font-size: 14px;
+    min-height: 0;
+}
+
+window#waybar {
+    background-color: transparent;
+    color: #C0CAF5;
+}
+
+#window, #clock, #hardware, #network, #tray, #custom-swaync, #bluetooth {
+    background-color: #1A1B26;
+    padding: 0 14px;
+    margin: 0 4px;
+    border-radius: 12px;
+    border: 2px solid #15161E;
+    transition: all 0.2s ease;
+}
+
+#hardware {
+    padding: 0 6px;
+}
+
+#pulseaudio, #backlight, #custom-battery {
+    padding: 0 8px;
+    margin: 0;
+    border: none;
+    border-radius: 0;
+    background-color: transparent;
+}
+
+#workspaces {
+    background-color: #1A1B26;
+    padding: 0 4px;
+    margin: 0 4px;
+    border-radius: 12px;
+    border: 2px solid #15161E;
+    transition: all 0.2s ease;
+}
+
+#workspaces:hover, #window:hover, #clock:hover, #hardware:hover, #network:hover, #tray:hover, #custom-swaync:hover, #bluetooth:hover {
+    border: 2px solid #33E0E0;
+}
+
+#workspaces button {
+    padding: 0px 4px;
+    margin: 4px 2px;
+    border-radius: 8px;
+    color: #C0CAF5;
+    background: transparent;
+}
+
+#workspaces button:hover {
+    box-shadow: inherit;
+    text-shadow: inherit;
+    color: #7DCFFF;
+}
+
+#workspaces button.focused,
+#workspaces button.active {
+    background-color: #39c5bb;
+    color: #1a1b26;
+    font-weight: bold;
+}
+
+#workspaces button.focused label,
+#workspaces button.active label {
+    color: #1a1b26;
+}
+
+#workspaces button.urgent {
+    color: #F7768E;
+}
+
+#battery.critical:not(.charging), #custom-battery.critical:not(.charging) {
+    background-color: #F7768E;
+    color: #C0CAF5;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+@keyframes blink {
+    to {
+        background-color: #1A1B26;
+        color: #F7768E;
+    }
+}
+
+#custom-swaync {
+    color: #33E0E0;
+    padding-right: 16px;
+    padding-left: 12px;
+}
+
+#window.empty, window#waybar.empty #window {
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+}

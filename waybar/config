@@ -1,0 +1,103 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 34,
+    "margin-top": 3,
+    "margin-left": 3,
+    "margin-right": 3,
+    "margin-bottom": 0,
+    "spacing": 4,
+    "modules-left": ["sway/workspaces", "sway/mode", "sway/window"],
+    "modules-center": ["clock"],
+    "modules-right": ["group/hardware", "tray", "custom/swaync"],
+
+    "group/hardware": {
+        "orientation": "horizontal",
+        "modules": ["pulseaudio", "backlight", "custom/battery"]
+    },
+
+    "tray": {
+        "spacing": 10
+    },
+
+    "sway/workspaces": {
+        "disable-scroll": false,
+        "all-outputs": true,
+        "format": "{name}"
+    },
+    "sway/window": {
+        "max-length": 50
+    },
+    "clock": {
+        "format": "<span color='#39c5bb'>󰥔</span>  {:%I:%M %p   <span color='#39c5bb'>󰃭</span>  %b %e}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+    },
+    "custom/battery": {
+        "exec": "~/.config/waybar/battery.sh",
+        "on-click": "~/.config/waybar/tlp_menu.sh",
+        "return-type": "json",
+        "interval": 10,
+        "format": "{}"
+    },
+    "network": {
+        "format-wifi": "<span color='#39c5bb'>󰤨</span>   {essid}",
+        "format-ethernet": "<span color='#39c5bb'>󰈀</span>   {ipaddr}/{cidr}",
+        "tooltip-format": "{ifname} via {gwaddr} 󰊗",
+        "format-linked": "{ifname} (No IP) 󰈀",
+        "format-disconnected": "<span color='#F7768E'>󰤭</span>   Disconnected",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+    },
+    "pulseaudio": {
+        "tooltip": false,
+        "format": "<span color='#39c5bb'>{icon}</span>  {volume}%",
+        "format-bluetooth": "<span color='#39c5bb'>{icon}󰂰</span>  {volume}%",
+        "format-bluetooth-muted": "<span color='#F7768E'>󰖁󰂰</span>",
+        "format-muted": "<span color='#F7768E'>󰖁</span>  Muted",
+        "format-icons": {
+            "headphone": "󰋋",
+            "hands-free": "󰋋",
+            "headset": "󰋋",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["󰕿", "󰖀", "󰕾"]
+        },
+        "on-click": "pkill pavucontrol || pavucontrol"
+    },
+    "backlight": {
+        "tooltip": false,
+        "format": "<span color='#39c5bb'>{icon}</span>  {percent}%",
+        "format-icons": ["󰃞", "󰃟", "󰃠"],
+        "on-scroll-up": "brightnessctl set 1%+",
+        "on-scroll-down": "brightnessctl set 1%-"
+    },
+    "bluetooth": {
+        "format": "<span color='#39c5bb'>󰂯</span>  {status}",
+        "format-disabled": "<span color='#F7768E'>󰂲</span>  Disabled",
+        "format-connected": "<span color='#39c5bb'>󰂱</span>  {num_connections}",
+        "tooltip-format": "{controller_alias}\t{controller_address}",
+        "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+        "on-click": "pkill blueman-manager || blueman-manager"
+    },
+    "custom/swaync": {
+        "tooltip": false,
+        "format": "<span color='#39c5bb'> {icon} </span>",
+        "format-icons": {
+            "notification": "󱅫",
+            "none": "󰂚",
+            "dnd-notification": "󱏧",
+            "dnd-none": "󱏧",
+            "inhibited-notification": "󱅫",
+            "inhibited-none": "󰂚",
+            "dnd-inhibited-notification": "󱏧",
+            "dnd-inhibited-none": "󱏧"
+        },
+        "return-type": "json",
+        "exec-if": "which swaync-client",
+        "exec": "swaync-client -swb",
+        "on-click": "swaync-client -t -sw",
+        "on-click-right": "swaync-client -d -sw",
+        "escape": true
+    }
+}
