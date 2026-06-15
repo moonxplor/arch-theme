@@ -103,7 +103,7 @@
     "custom/power": {
         "format": " ",
         "tooltip": false,
-        "on-click": "wlogout --protocol layer-shell -b 3 -T 300 -B 300",
+        "on-click": "~/.config/rofi/powermenu.sh",
         "exec": "echo ''",
         "interval": "once"
     }

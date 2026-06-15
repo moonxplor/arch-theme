@@ -1,0 +1,27 @@
+@import "config.rasi"
+
+window {
+    width: 280px;
+    location: northeast;
+    anchor: northeast;
+    x-offset: -10px;
+    y-offset: 50px;
+    border-radius: 12px;
+}
+
+inputbar {
+    enabled: false;
+}
+
+listview {
+    lines: 5;
+    padding: 10px;
+}
+
+element {
+    padding: 15px;
+}
+
+element-text {
+    font: "JetBrainsMono Nerd Font 14";
+}
