@@ -99,9 +99,9 @@ window#waybar {
 }
 
 #custom-power {
-    color: #F7768E;
-    padding-right: 16px;
-    padding-left: 12px;
+    color: #39c5bb;
+    padding-right: 17px;
+    padding-left: 17px;
 }
 
 #window.empty, window#waybar.empty #window {

@@ -9,7 +9,7 @@
     "spacing": 4,
     "modules-left": ["sway/workspaces", "sway/mode", "sway/window"],
     "modules-center": ["clock"],
-    "modules-right": ["group/hardware", "tray", "custom/swaync", "custom/power"],
+    "modules-right": ["tray", "custom/swaync", "group/hardware", "custom/power"],
 
     "group/hardware": {
         "orientation": "horizontal",
@@ -101,7 +101,7 @@
         "escape": true
     },
     "custom/power": {
-        "format": " ",
+        "format": "",
         "tooltip": false,
         "on-click": "~/.config/rofi/powermenu.sh",
         "exec": "echo ''",
