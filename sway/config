@@ -73,16 +73,13 @@ gaps outer 1px
 
 ### Idle configuration
 #
-# Example configuration:
-#
-# exec swayidle -w \
-#          timeout 300 'swaylock -f -c 000000' \
-#          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-#          before-sleep 'swaylock -f -c 000000'
-#
-# This will lock your screen after 300 seconds of inactivity, then turn off
-# your displays after another 300 seconds, and turn your screens back on when
-# resumed. It will also lock your screen before your computer goes to sleep.
+# KDE-style aggressive power management:
+exec swayidle -w \
+         timeout 60 'brightnessctl -s set 10' resume 'brightnessctl -r' \
+         timeout 120 'swaylock -f -c 1A1B26' \
+         timeout 300 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+         timeout 600 'systemctl suspend' \
+         before-sleep 'swaylock -f -c 1A1B26'
 
 ### Input configuration
 #
