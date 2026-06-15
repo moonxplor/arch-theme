@@ -5,7 +5,7 @@ window {
     location: northeast;
     anchor: northeast;
     x-offset: -8px;
-    y-offset: 45px;
+    y-offset: 23px;
     border-radius: 12px;
 }
 
