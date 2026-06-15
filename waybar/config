@@ -103,7 +103,7 @@
     "custom/power": {
         "format": " ",
         "tooltip": false,
-        "on-click": "wlogout --protocol layer-shell -b 5 -T 400 -B 400",
+        "on-click": "wlogout --protocol layer-shell -b 3 -T 300 -B 300",
         "exec": "echo ''",
         "interval": "once"
     }

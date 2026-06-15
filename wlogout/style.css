@@ -10,15 +10,14 @@ window {
 button {
     border-radius: 20px;
     border-color: #1a1b26;
-    text-decoration-color: #c0caf5;
-    color: #c0caf5;
+    color: transparent;
     background-color: #24283b;
     border-style: solid;
     border-width: 2px;
     background-repeat: no-repeat;
     background-position: center;
     background-size: 25%;
-    margin: 10px;
+    margin: 20px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     transition: box-shadow 0.2s ease-in-out, background-color 0.2s ease-in-out;
 }
@@ -26,7 +25,7 @@ button {
 button:focus, button:active, button:hover {
     background-color: #39c5bb;
     border-color: #39c5bb;
-    color: #1a1b26;
+    color: transparent;
     outline-style: none;
 }
 
