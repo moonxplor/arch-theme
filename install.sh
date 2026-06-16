@@ -49,7 +49,7 @@ PACKAGES=(
     # Default Apps
     "zen-browser-bin" "zed" "neovim" "zathura" "zathura-pdf-mupdf" "imv" "mpv" "xarchiver" "vesktop"
     # Theming & Fonts
-    "adw-gtk3" "ttf-jetbrains-mono-nerd" "librsvg" "npm"
+    "adw-gtk-theme" "ttf-jetbrains-mono-nerd" "librsvg" "npm"
 )
 yay -S --needed --noconfirm "${PACKAGES[@]}"
 log_success "Dependencies installed!"

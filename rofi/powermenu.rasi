@@ -4,8 +4,8 @@ window {
     width: 220px;
     location: northeast;
     anchor: northeast;
-    x-offset: -8px;
-    y-offset: 23px;
+    x-offset: -5px;
+    y-offset: 5px;
     border-radius: 12px;
 }
 

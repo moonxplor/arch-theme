@@ -8,15 +8,22 @@
 
 window#waybar {
     background-color: transparent;
-    color: #C0CAF5;
+    color: #c0caf5;
 }
 
-#window, #clock, #hardware, #network, #tray, #custom-swaync, #bluetooth, #custom-power {
-    background-color: #1A1B26;
+#window,
+#clock,
+#hardware,
+#network,
+#tray,
+#custom-swaync,
+#bluetooth,
+#custom-power {
+    background-color: #1a1b26;
     padding: 0 14px;
     margin: 0 4px;
     border-radius: 12px;
-    border: 2px solid #15161E;
+    border: 2px solid #15161e;
     transition: all 0.2s ease;
 }
 
@@ -24,7 +31,9 @@ window#waybar {
     padding: 0 6px;
 }
 
-#pulseaudio, #backlight, #custom-battery {
+#pulseaudio,
+#backlight,
+#custom-battery {
     padding: 0 8px;
     margin: 0;
     border: none;
@@ -33,30 +42,38 @@ window#waybar {
 }
 
 #workspaces {
-    background-color: #1A1B26;
+    background-color: #1a1b26;
     padding: 0 4px;
     margin: 0 4px;
     border-radius: 12px;
-    border: 2px solid #15161E;
+    border: 2px solid #15161e;
     transition: all 0.2s ease;
 }
 
-#workspaces:hover, #window:hover, #clock:hover, #hardware:hover, #network:hover, #tray:hover, #custom-swaync:hover, #bluetooth:hover, #custom-power:hover {
-    border: 2px solid #33E0E0;
+#workspaces:hover,
+#window:hover,
+#clock:hover,
+#hardware:hover,
+#network:hover,
+#tray:hover,
+#custom-swaync:hover,
+#bluetooth:hover,
+#custom-power:hover {
+    border: 2px solid #33e0e0;
 }
 
 #workspaces button {
     padding: 0px 4px;
     margin: 4px 2px;
     border-radius: 8px;
-    color: #C0CAF5;
+    color: #c0caf5;
     background: transparent;
 }
 
 #workspaces button:hover {
     box-shadow: inherit;
     text-shadow: inherit;
-    color: #7DCFFF;
+    color: #7dcfff;
 }
 
 #workspaces button.focused,
@@ -72,12 +89,13 @@ window#waybar {
 }
 
 #workspaces button.urgent {
-    color: #F7768E;
+    color: #f7768e;
 }
 
-#battery.critical:not(.charging), #custom-battery.critical:not(.charging) {
-    background-color: #F7768E;
-    color: #C0CAF5;
+#battery.critical:not(.charging),
+#custom-battery.critical:not(.charging) {
+    background-color: #f7768e;
+    color: #c0caf5;
     animation-name: blink;
     animation-duration: 0.5s;
     animation-timing-function: linear;
@@ -87,23 +105,25 @@ window#waybar {
 
 @keyframes blink {
     to {
-        background-color: #1A1B26;
-        color: #F7768E;
+        background-color: #1a1b26;
+        color: #f7768e;
     }
 }
 
 #custom-swaync {
-    color: #33E0E0;
+    color: #33e0e0;
     padding-right: 16px;
     padding-left: 12px;
 }
 
 #custom-power {
     color: #39c5bb;
-    padding: 0 14px;
+    padding-right: 16px;
+    padding-left: 12px;
 }
 
-#window.empty, window#waybar.empty #window {
+#window.empty,
+window#waybar.empty #window {
     background-color: transparent;
     border: none;
     box-shadow: none;
