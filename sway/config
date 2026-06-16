@@ -95,13 +95,13 @@ exec swayidle -w \
 #   input type:keyboard {
 #       xkb_layout "eu"
 #   }
- 
+
     # Hold middle-click (scroll wheel) and move mouse to scroll
     input type:pointer {
     scroll_method on_button_down
     natural_scroll enabled
 }
- 
+
 # You can also configure each device individually.
 # Read `man 5 sway-input` for more information about this section.
 
@@ -321,3 +321,6 @@ bindsym $mod+period exec ~/.config/sway/rofi-manager.sh emoji
 
 # Window Rules
 for_window [app_id="swappy"] floating enable
+
+# Volume Mixer Popup (Pavucontrol)
+for_window [app_id="org.pulseaudio.pavucontrol"] floating enable, resize set width 450 px height 265 px, move position 875 0

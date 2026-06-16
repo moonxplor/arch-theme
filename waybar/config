@@ -60,14 +60,15 @@
             "phone": "",
             "portable": "",
             "car": "",
-            "default": ["󰕿", "󰖀", "󰕾"]
         },
-        "on-click": "pkill pavucontrol || pavucontrol"
+        "on-click": "pkill pavucontrol || pavucontrol",
+        "on-click-middle": "pactl set-sink-mute @DEFAULT_SINK@ toggle"
     },
     "backlight": {
         "tooltip": false,
         "format": "<span color='#39c5bb'>{icon}</span>  {percent}%",
         "format-icons": ["󰃞", "󰃟", "󰃠"],
+        "on-click-middle": "~/.config/waybar/toggle_idle.sh",
         "on-scroll-up": "brightnessctl set 1%+",
         "on-scroll-down": "brightnessctl set 1%-"
     },
@@ -101,7 +102,7 @@
         "escape": true
     },
     "custom/power": {
-        "format": "",
+        "format": "  ",
         "tooltip": false,
         "on-click": "~/.config/rofi/powermenu.sh",
         "exec": "echo ''",
