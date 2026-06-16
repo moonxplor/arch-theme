@@ -32,6 +32,6 @@ case $chosen in
         swaymsg exit
         ;;
     Lock)
-        swaylock -f -c 1A1B26
+        swaylock -f -i /home/dipak/code/arch-theme/wallpapers/satisfaction_hires_lock_final.png
         ;;
 esac
