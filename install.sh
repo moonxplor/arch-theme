@@ -89,7 +89,7 @@ backup_and_symlink() {
 }
 
 # Config directories
-for config in sway swaylock waybar kitty rofi swaync wlogout btop environment.d qt5ct qt6ct gtk-3.0 gtk-4.0; do
+for config in sway swaylock waybar kitty rofi swaync wlogout btop environment.d qt5ct qt6ct tlpui gtk-3.0 gtk-4.0; do
     backup_and_symlink "$DOTFILES_DIR/$config" "$HOME/.config/$config"
 done
 
@@ -111,11 +111,17 @@ backup_and_symlink "$DOTFILES_DIR/applications/antigravity.desktop" "$HOME/.loca
 gtk-update-icon-cache -f -t "$HOME/.local/share/icons/YAMIS-enlarged" || true
 log_success "Custom icons linked!"
 
-# --- 8. Patch Scripts ---
-log_info "Installing patch scripts..."
+# --- 8. System Configurations & Patch Scripts ---
+log_info "Installing system configurations and patch scripts..."
 sudo cp "$DOTFILES_DIR/scripts/install-antigravity-tray-patch.sh" "/usr/local/bin/install-antigravity-tray-patch.sh"
 sudo chmod +x "/usr/local/bin/install-antigravity-tray-patch.sh"
-log_success "Patch scripts installed!"
+
+log_info "Restoring TLP power management system config..."
+if [ -f "$DOTFILES_DIR/etc/tlp.conf" ]; then
+    sudo cp "$DOTFILES_DIR/etc/tlp.conf" "/etc/tlp.conf"
+    sudo chmod 644 "/etc/tlp.conf"
+fi
+log_success "System scripts and configs installed!"
 
 # --- 9. Systemd Services ---
 log_info "Enabling systemd user services..."
