@@ -190,7 +190,8 @@ exec_always ~/.config/sway/idle.sh
     # respectively.
     # Open Brave Browser
     bindsym $mod+b exec $browser
-    bindsym $mod+z exec zeditor -n
+    bindsym $mod+z exec zeditor
+    bindsym $mod+Shift+z exec zeditor -n
     # Cliphist: Launch clipboard manager (Replaced splitv)
     bindsym $mod+v exec ~/.config/sway/rofi-manager.sh clipboard
 
