@@ -121,6 +121,12 @@ if [ -f "$DOTFILES_DIR/etc/tlp.conf" ]; then
     sudo cp "$DOTFILES_DIR/etc/tlp.conf" "/etc/tlp.conf"
     sudo chmod 644 "/etc/tlp.conf"
 fi
+
+log_info "Restoring Ly display manager config..."
+if [ -f "$DOTFILES_DIR/ly/config.ini" ]; then
+    sudo cp "$DOTFILES_DIR/ly/config.ini" "/etc/ly/config.ini"
+    sudo chmod 644 "/etc/ly/config.ini"
+fi
 log_success "System scripts and configs installed!"
 
 # --- 9. Systemd Services ---
