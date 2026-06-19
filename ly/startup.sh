@@ -23,8 +23,22 @@ COLORS="${BLACK} ${DARK_RED} ${DARK_GREEN} ${DARK_YELLOW} ${DARK_BLUE} ${DARK_MA
 
 i=0
 while [ $i -lt 16 ]; do
-	printf "\033]P%X%s" ${i} "$(echo "$COLORS" | cut -d ' ' -f$(( i + 1)))"
+	seq="\033]P%X%s"
+	val=$(printf "$seq" ${i} "$(echo "$COLORS" | cut -d ' ' -f$(( i + 1)))")
+	
+	# Forcefully inject the color sequence into every physical TTY device
+	for t in 1 2 3 4 5 6; do
+		if [ -w "/dev/tty$t" ]; then
+			printf "%b" "$val" > "/dev/tty$t" 2>/dev/null
+		fi
+	done
+	
 	i=$(( i + 1 ))
 done
 
-clear # for fixing background artifacting after changing color
+# Force a clear screen on the active TTY to paint the background
+for t in 1 2 3 4 5 6; do
+	if [ -w "/dev/tty$t" ]; then
+		printf "\033[2J\033[H" > "/dev/tty$t" 2>/dev/null
+	fi
+done
