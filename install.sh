@@ -126,6 +126,9 @@ log_info "Restoring Ly display manager config..."
 if [ -f "$DOTFILES_DIR/ly/config.ini" ]; then
     sudo cp "$DOTFILES_DIR/ly/config.ini" "/etc/ly/config.ini"
     sudo chmod 644 "/etc/ly/config.ini"
+    
+    sudo cp "$DOTFILES_DIR/ly/startup.sh" "/etc/ly/startup.sh"
+    sudo chmod +x "/etc/ly/startup.sh"
 fi
 log_success "System scripts and configs installed!"
 
