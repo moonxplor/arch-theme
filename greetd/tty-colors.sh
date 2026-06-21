@@ -1,6 +1,7 @@
 #!/bin/sh
-# Miku Dark Mode TTY Hardware Color Override
-# This forces the raw Linux Virtual Terminal to use Miku Dark hex codes!
+# Miku Dark Mode TTY Color Override for greetd
+# Forces the Linux VT to use Tokyo Night / Miku palette
+# so the greeter background is #1a1b26 instead of plain black.
 
 BLACK="1a1b26"
 DARK_RED="f7768e"
@@ -25,18 +26,17 @@ i=0
 while [ $i -lt 16 ]; do
 	seq="\033]P%X%s"
 	val=$(printf "$seq" ${i} "$(echo "$COLORS" | cut -d ' ' -f$(( i + 1)))")
-	
-	# Forcefully inject the color sequence into every physical TTY device
+
 	for t in 1 2 3 4 5 6; do
 		if [ -w "/dev/tty$t" ]; then
 			printf "%b" "$val" > "/dev/tty$t" 2>/dev/null
 		fi
 	done
-	
+
 	i=$(( i + 1 ))
 done
 
-# Force a clear screen on the active TTY to paint the background
+# Clear screens to apply the new background color
 for t in 1 2 3 4 5 6; do
 	if [ -w "/dev/tty$t" ]; then
 		printf "\033[2J\033[H" > "/dev/tty$t" 2>/dev/null
