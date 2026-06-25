@@ -9,19 +9,22 @@ fi
 echo "Creating the tray patch script..."
 cat << 'INNER_EOF' > /usr/local/bin/patch-antigravity-tray.sh
 #!/bin/bash
+MAIN_USER=$(awk -F':' '{ if ($3 >= 1000 && $3 < 65534) { print $1; exit } }' /etc/passwd)
+MAIN_USER_HOME=$(eval echo "~$MAIN_USER")
+
 ASAR="/opt/Antigravity/resources/app.asar"
 TMP_DIR="/tmp/antigravity-asar-patch"
 TMP_ASAR="/tmp/app.asar.patched"
-SVG_FILE="/home/dipak/.local/share/icons/YAMIS-enlarged/apps/scalable/antigravity.svg"
+SVG_FILE="$MAIN_USER_HOME/.local/share/icons/YAMIS-enlarged/apps/scalable/antigravity.svg"
 
 rm -rf "$TMP_DIR" "$TMP_ASAR"
-sudo -u dipak npx -y asar extract "$ASAR" "$TMP_DIR"
+sudo -u "$MAIN_USER" npx -y asar extract "$ASAR" "$TMP_DIR"
 
 rsvg-convert -w 16 -h 16 "$SVG_FILE" -o "$TMP_DIR/trayTemplate.png"
 rsvg-convert -w 32 -h 32 "$SVG_FILE" -o "$TMP_DIR/trayTemplate@2x.png"
 rsvg-convert -w 48 -h 48 "$SVG_FILE" -o "$TMP_DIR/icon.png"
 
-sudo -u dipak npx -y asar pack "$TMP_DIR" "$TMP_ASAR"
+sudo -u "$MAIN_USER" npx -y asar pack "$TMP_DIR" "$TMP_ASAR"
 mv "$TMP_ASAR" "$ASAR"
 rm -rf "$TMP_DIR"
 INNER_EOF

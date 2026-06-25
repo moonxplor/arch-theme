@@ -1,6 +1,6 @@
 {
     "label" : "lock",
-    "action" : "swaylock -f -i /home/dipak/code/arch-theme/wallpapers/satisfaction_hires_lock_final.png",
+    "action" : "swaylock -f -i $HOME/Pictures/wallpapers/satisfaction_hires_lock_final.png",
     "text" : "Lock",
     "keybind" : "l"
 }

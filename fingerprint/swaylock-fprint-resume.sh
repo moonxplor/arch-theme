@@ -21,10 +21,14 @@ if [ "$1" = "post" ]; then
         
         # Only inject keystroke if swaylock is actually running
         if pgrep -x swaylock > /dev/null; then
-            for socket in /run/user/1000/wayland-*; do
+            SWAYLOCK_PID=$(pgrep -x swaylock | head -n1)
+            SWAYLOCK_USER=$(ps -o user= -p "$SWAYLOCK_PID")
+            SWAYLOCK_UID=$(id -u "$SWAYLOCK_USER")
+            
+            for socket in /run/user/$SWAYLOCK_UID/wayland-*; do
                 if [ -S "$socket" ]; then
                     WAYLAND_DISPLAY=$(basename "$socket")
-                    su - dipak -c "XDG_RUNTIME_DIR=/run/user/1000 WAYLAND_DISPLAY=\"$WAYLAND_DISPLAY\" wtype -k Return"
+                    su - "$SWAYLOCK_USER" -c "XDG_RUNTIME_DIR=/run/user/$SWAYLOCK_UID WAYLAND_DISPLAY=\"$WAYLAND_DISPLAY\" wtype -k Return"
                 fi
             done
         fi

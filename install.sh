@@ -12,6 +12,18 @@ log_info() { echo -e "${BLUE}[*] $1${RESET}"; }
 log_success() { echo -e "${GREEN}[+] $1${RESET}"; }
 log_error() { echo -e "${RED}[!] $1${RESET}"; }
 
+prompt_yn() {
+    while true; do
+        read -p "$(echo -e "${BLUE}[?] $1 [Y/n] ${RESET}")" yn
+        case $yn in
+            [Yy]* ) return 0;;
+            [Nn]* ) return 1;;
+            "" ) return 0;;
+            * ) echo "Please answer yes or no.";;
+        esac
+    done
+}
+
 # --- Pre-flight Checks ---
 if [ "$EUID" -eq 0 ]; then
     log_error "Please do not run this script as root. Use your normal user account."
@@ -58,9 +70,13 @@ log_success "Dependencies installed!"
 
 # --- 3. Install Zinit ---
 if [ ! -d "$HOME/.local/share/zinit" ]; then
-    log_info "Installing Zinit plugin manager..."
-    bash -c "$(curl --fail --show-error --silent --location https://raw.githubusercontent.com/zdharma-continuum/zinit/HEAD/scripts/install.sh)"
-    log_success "Zinit installed!"
+    if prompt_yn "Install Zinit plugin manager (Recommended for ZSH)?"; then
+        log_info "Installing Zinit plugin manager..."
+        bash -c "$(curl --fail --show-error --silent --location https://raw.githubusercontent.com/zdharma-continuum/zinit/HEAD/scripts/install.sh)"
+        log_success "Zinit installed!"
+    else
+        log_info "Skipping Zinit..."
+    fi
 fi
 
 # --- 4. Directory Management ---
@@ -101,10 +117,21 @@ backup_and_symlink "$DOTFILES_DIR/zshrc" "$HOME/.zshrc"
 backup_and_symlink "$DOTFILES_DIR/mimeapps.list" "$HOME/.config/mimeapps.list"
 log_success "Configs successfully linked!"
 
-# --- 6. Install Wallpaper ---
-log_info "Installing wallpaper..."
+# --- 6. Install Wallpaper & Generate Bookmarks ---
+log_info "Installing wallpapers..."
 cp "$DOTFILES_DIR/wallpapers/satisfaction_waybar_blur.png" "$HOME/Pictures/wallpapers/satisfaction_waybar_blur.png"
-log_success "Wallpaper installed!"
+cp "$DOTFILES_DIR/wallpapers/satisfaction_hires_lock_final.png" "$HOME/Pictures/wallpapers/satisfaction_hires_lock_final.png"
+log_success "Wallpapers installed!"
+
+log_info "Generating file manager bookmarks..."
+cat << EOF > "$DOTFILES_DIR/gtk-3.0/bookmarks"
+file://$HOME/Pictures
+file://$HOME/code
+file://$HOME/Music
+file://$HOME/Documents
+file://$HOME/Videos
+file://$HOME/Downloads
+EOF
 
 # --- 7. Custom Icons & Desktop Launchers ---
 log_info "Symlinking custom icons and desktop files..."
@@ -114,14 +141,30 @@ gtk-update-icon-cache -f -t "$HOME/.local/share/icons/YAMIS-enlarged" || true
 log_success "Custom icons linked!"
 
 # --- 8. System Configurations & Patch Scripts ---
-log_info "Installing system configurations and patch scripts..."
-sudo cp "$DOTFILES_DIR/scripts/install-miku-tray-patch.sh" "/usr/local/bin/install-miku-tray-patch.sh"
-sudo chmod +x "/usr/local/bin/install-miku-tray-patch.sh"
+if prompt_yn "Install Miku Tray Icon Patch (Specific to Miku theme)?"; then
+    log_info "Installing system configurations and patch scripts..."
+    sudo cp "$DOTFILES_DIR/scripts/install-miku-tray-patch.sh" "/usr/local/bin/install-miku-tray-patch.sh"
+    sudo chmod +x "/usr/local/bin/install-miku-tray-patch.sh"
+    log_success "Tray patch installed!"
+fi
 
-log_info "Restoring TLP power management system config..."
-if [ -f "$DOTFILES_DIR/etc/tlp.conf" ]; then
-    sudo cp "$DOTFILES_DIR/etc/tlp.conf" "/etc/tlp.conf"
-    sudo chmod 644 "/etc/tlp.conf"
+if prompt_yn "Restore TLP Power Management Configuration?"; then
+    log_info "Restoring TLP power management system config..."
+    if [ -f "$DOTFILES_DIR/etc/tlp.conf" ]; then
+        sudo cp "$DOTFILES_DIR/etc/tlp.conf" "/etc/tlp.conf"
+        sudo chmod 644 "/etc/tlp.conf"
+        log_success "TLP restored!"
+    fi
+fi
+
+if prompt_yn "Setup Fingerprint Authentication?"; then
+    log_info "Running fingerprint setup..."
+    if [ -f "$DOTFILES_DIR/fingerprint/setup.sh" ]; then
+        sudo bash "$DOTFILES_DIR/fingerprint/setup.sh"
+        log_success "Fingerprint setup completed!"
+    else
+        log_error "Fingerprint setup script not found!"
+    fi
 fi
 
 log_info "Setting up Lemurs display manager..."
