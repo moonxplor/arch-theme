@@ -437,7 +437,61 @@ Environment variables force Qt apps to use `qt5ct`/`qt6ct` for consistent themin
 | `toggle_idle.sh` | `waybar/` | Toggle idle inhibitor on/off | Backlight middle-click |
 | `powermenu.sh` | `rofi/` | Rofi power menu (lock/logout/reboot/shutdown) | `Super+Power` button |
 | `install-miku-tray-patch.sh` | `scripts/` | Patches system tray icons to Miku theme | Manual |
-| `apply_frosted_glass.sh` | `scripts/` | Applies frosted glass effect to images | Manual |
+| `apply_frosted_glass.sh` | `scripts/` | Wallpaper generator (frosted glass + lockscreen) | Manual |
+
+### Wallpaper Generator (`scripts/apply_frosted_glass.sh`)
+
+An ImageMagick pipeline that takes **any wallpaper** and converts it into two theme-ready images:
+
+1. **Desktop wallpaper** — with a frosted glass blur strip along all four edges (designed so Waybar and screen borders blend seamlessly into the wallpaper)
+2. **Lock screen wallpaper** — a heavily blurred, darkened variant tinted with the Tokyo Night base color (`#1a1b26` at 60% opacity), downscaled to 1080p
+
+**Requirements:** `imagemagick` must be installed (`sudo pacman -S imagemagick`).
+
+**Usage:**
+```bash
+# Interactive mode
+./scripts/apply_frosted_glass.sh
+
+# CLI mode
+./scripts/apply_frosted_glass.sh input.png output.png
+```
+
+**How the pipeline works:**
+
+```
+┌─────────────────────────────────────────────────┐
+│  1. INPUT IMAGE                                 │
+│     ↓                                           │
+│  2. Resize to 4K (3840×2160) if needed          │
+│     • Option A: Crop to fill (preserves ratio)  │
+│     • Option B: Stretch to fit                  │
+│     ↓                                           │
+│  3. Generate edge masks:                        │
+│     • Top:    80px solid white + 30px fade       │
+│     • Bottom: 30px fade                          │
+│     • Left:   30px fade                          │
+│     • Right:  30px fade                          │
+│     ↓                                           │
+│  4. Composite masks via Screen blending          │
+│     ↓                                           │
+│  5. Apply 25px Gaussian blur to masked regions   │
+│     ↓                                           │
+│  6. OUTPUT: Desktop wallpaper (4K)               │
+│     ↓                                           │
+│  7. BONUS: Generate lockscreen variant           │
+│     • 40px blur + 60% Tokyo Night tint           │
+│     • Downscaled to 1920×1080                    │
+└─────────────────────────────────────────────────┘
+```
+
+**Output files:**
+| File | Resolution | Description |
+|------|-----------|-------------|
+| `<output>.png` | 3840×2160 | Desktop wallpaper with frosted glass edges |
+| `<output>_lock.png` | 1920×1080 | Lock screen — blurred & tinted Tokyo Night |
+
+> **To use a new wallpaper:** Run this script on any image, then copy the outputs into `wallpapers/` and update the path in `sway/config` line 65.
 
 ### Idle Timeouts (`sway/idle.sh`)
 
