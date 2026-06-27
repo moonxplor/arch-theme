@@ -35,7 +35,41 @@ DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 log_info "Welcome to the Miku Arch Dotfiles Installer!"
 sleep 1
 
-# --- 1. Install AUR Helper (yay) ---
+# --- 1. Pacman Configurations & Repositories ---
+log_info "Configuring Pacman parallel downloads and repositories..."
+
+# Enable Parallel Downloads if not already enabled
+if grep -q "^#ParallelDownloads" /etc/pacman.conf; then
+    log_info "Enabling Parallel Downloads..."
+    sudo sed -i 's/^#ParallelDownloads/ParallelDownloads/' /etc/pacman.conf
+fi
+
+# Enable multilib repo if not already enabled
+if ! grep -q "^\[multilib\]" /etc/pacman.conf; then
+    log_info "Enabling multilib repository..."
+    sudo sed -i '/^#\[multilib\]/,/^#Include = \/etc\/pacman.d\/mirrorlist/ s/^#//' /etc/pacman.conf
+fi
+
+# Enable Chaotic AUR if not already enabled
+if ! grep -q "^\[chaotic-aur\]" /etc/pacman.conf; then
+    log_info "Setting up Chaotic AUR..."
+    # 1. Receive key
+    sudo pacman-key --recv-key 3056513E7043D7A13B266D9614E7517E4F707477 --keyserver keyserver.ubuntu.com || true
+    sudo pacman-key --lsign-key 3056513E7043D7A13B266D9614E7517E4F707477 || true
+    # 2. Install keyring and mirrorlist
+    sudo pacman -U --noconfirm 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst' || true
+    sudo pacman -U --noconfirm 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst' || true
+    # 3. Append to pacman.conf
+    sudo bash -c 'cat <<EOF >> /etc/pacman.conf
+
+[chaotic-aur]
+Include = /etc/pacman.d/chaotic-mirrorlist
+EOF'
+    sudo pacman -Sy
+    log_success "Chaotic AUR enabled!"
+fi
+
+# --- 2. Install AUR Helper (yay) ---
 if ! command -v yay &> /dev/null; then
     log_info "yay not found. Installing yay..."
     sudo pacman -S --needed --noconfirm base-devel git
@@ -50,7 +84,7 @@ else
     log_success "yay is already installed."
 fi
 
-# --- 2. Install Packages ---
+# --- 3. Install Packages ---
 log_info "Installing dependencies..."
 PACKAGES=(
     # Core Environment
@@ -69,7 +103,7 @@ PACKAGES=(
 yay -S --needed --noconfirm "${PACKAGES[@]}"
 log_success "Dependencies installed!"
 
-# --- 3. Install Zinit ---
+# --- 4. Install Zinit ---
 if [ ! -d "$HOME/.local/share/zinit" ]; then
     if prompt_yn "Install Zinit plugin manager (Recommended for ZSH)?"; then
         log_info "Installing Zinit plugin manager..."
@@ -80,7 +114,7 @@ if [ ! -d "$HOME/.local/share/zinit" ]; then
     fi
 fi
 
-# --- 4. Directory Management ---
+# --- 5. Directory Management ---
 log_info "Creating required directories..."
 mkdir -p "$HOME/.config"
 mkdir -p "$HOME/.local/share/icons"
@@ -89,7 +123,7 @@ mkdir -p "$HOME/.config/systemd/user"
 mkdir -p "$HOME/Pictures/wallpapers"
 log_success "Directories created!"
 
-# --- 5. Symlinking Configurations ---
+# --- 6. Symlinking Configurations ---
 log_info "Backing up and symlinking configs..."
 
 backup_and_symlink() {
@@ -122,7 +156,7 @@ backup_and_symlink "$DOTFILES_DIR/zshrc" "$HOME/.zshrc"
 backup_and_symlink "$DOTFILES_DIR/mimeapps.list" "$HOME/.config/mimeapps.list"
 log_success "Configs successfully linked!"
 
-# --- 6. Install Wallpaper & Generate Bookmarks ---
+# --- 7. Install Wallpaper & Generate Bookmarks ---
 log_info "Installing wallpapers..."
 cp "$DOTFILES_DIR/wallpapers/satisfaction_waybar_blur.png" "$HOME/Pictures/wallpapers/satisfaction_waybar_blur.png"
 cp "$DOTFILES_DIR/wallpapers/satisfaction_hires_lock_final.png" "$HOME/Pictures/wallpapers/satisfaction_hires_lock_final.png"
@@ -138,14 +172,14 @@ file://$HOME/Videos
 file://$HOME/Downloads
 EOF
 
-# --- 7. Custom Icons & Desktop Launchers ---
+# --- 8. Custom Icons & Desktop Launchers ---
 log_info "Symlinking custom icons and desktop files..."
 backup_and_symlink "$DOTFILES_DIR/icons/YAMIS-enlarged" "$HOME/.local/share/icons/YAMIS-enlarged"
 backup_and_symlink "$DOTFILES_DIR/applications/miku.desktop" "$HOME/.local/share/applications/miku.desktop"
 gtk-update-icon-cache -f -t "$HOME/.local/share/icons/YAMIS-enlarged" || true
 log_success "Custom icons linked!"
 
-# --- 8. System Configurations & Patch Scripts ---
+# --- 9. System Configurations & Patch Scripts ---
 if prompt_yn "Install Miku Tray Icon Patch (Specific to Miku theme)?"; then
     log_info "Installing system configurations and patch scripts..."
     sudo cp "$DOTFILES_DIR/scripts/install-miku-tray-patch.sh" "/usr/local/bin/install-miku-tray-patch.sh"
@@ -192,7 +226,7 @@ sudo systemctl enable lemurs.service
 sudo systemctl daemon-reload
 log_success "System scripts and configs installed!"
 
-# --- 9. Systemd Services ---
+# --- 10. Systemd Services ---
 log_info "Enabling systemd user services..."
 backup_and_symlink "$DOTFILES_DIR/systemd/user/sway-hw-notify.service" "$HOME/.config/systemd/user/sway-hw-notify.service"
 systemctl --user daemon-reload

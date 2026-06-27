@@ -62,12 +62,13 @@ chmod +x install.sh
 ```
 
 The installer will:
-1. Install `yay` (AUR helper) if missing
-2. Install all required packages via `yay`
-3. Back up any existing configs to `*.bak`
-4. Symlink everything from this repo into `~/.config/`
-5. Set up Lemurs display manager, TLP, and systemd services
-6. Optionally configure fingerprint authentication
+1. Configure Pacman parallel downloads, enable the `multilib` repository, and set up the `chaotic-aur` pre-compiled repository.
+2. Install `yay` (AUR helper) if missing.
+3. Install all required packages via `yay`.
+4. Back up any existing configs to `*.bak` (and prevent nested backups).
+5. Symlink everything from this repo into `~/.config/`.
+6. Set up Lemurs display manager, TLP, and systemd services.
+7. Optionally configure fingerprint authentication.
 
 > **Note:** After installation, reboot or log out to enter your new Sway session.
 
