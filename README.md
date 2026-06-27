@@ -142,7 +142,9 @@ The heart of the desktop. SwayFX is used (not vanilla Sway) for blur and rounded
 | Corner Radius | 10px | 32 |
 | Gaps (inner) | 2px | 70 |
 | Gaps (outer) | 1px | 71 |
-| Blur | Enabled, radius 1 | 41–42 |
+| Blur | Enabled, radius 7, passes 4 (frosted glass) | 41–43 |
+| Shadows | Enabled, radius 20, color `#15161ecc` | 44–46 |
+| Inactive Dimming | Enabled, 15% dim | 48–49 |
 
 **Window Border Colors** (lines 35–39):
 
@@ -150,7 +152,7 @@ The heart of the desktop. SwayFX is used (not vanilla Sway) for blur and rounded
 |-------|--------|------------|------|
 | Focused | `#39c5bb` | `#39c5bb` | `#1a1b26` |
 | Focused Inactive | `#414868` | `#414868` | `#c0caf5` |
-| Unfocused | `#1a1b26` | `#1a1b26` | `#c0caf5` |
+| Unfocused | `#24283b` | `#24283b` | `#a9b1d6` |
 | Urgent | `#f7768e` | `#f7768e` | `#c0caf5` |
 
 **Cursor Theme** (lines 13–15):

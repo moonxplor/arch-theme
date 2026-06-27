@@ -34,12 +34,19 @@ corner_radius 10
 # class                 border  bground text    indicator child_border
 client.focused          #39c5bb #39c5bb #1a1b26 #bb9af7   #39c5bb
 client.focused_inactive #414868 #414868 #c0caf5 #bb9af7   #414868
-client.unfocused        #1a1b26 #1a1b26 #c0caf5 #bb9af7   #1a1b26
+client.unfocused        #24283b #24283b #a9b1d6 #bb9af7   #24283b
 client.urgent           #f7768e #f7768e #c0caf5 #bb9af7   #f7768e
 client.placeholder      #bb9af7 #bb9af7 #1a1b26 #bb9af7   #bb9af7
 
+# SwayFX Enhancements (Vibrancy, Blur, and Depth)
 blur enable
-blur_radius 1
+blur_radius 7
+blur_passes 4
+shadows enable
+shadow_blur_radius 20
+shadow_color #15161ecc
+for_window [tiling] dim_inactive 0.15
+for_window [floating] dim_inactive 0.15
 
 # Logo key. Use Mod1 for Alt.
 set $mod Mod4
