@@ -114,40 +114,19 @@ fi
 echo ""
 echo "Generating mask components..."
 
-# --- 6. Generate Edge Masks (dynamically computed from target resolution) ---
+# --- 6. Generate Waybar Top Mask (dynamically computed from target resolution) ---
 # Waybar strip: 80px solid blur at the top + 30px gradient fade
-# All other edges: 30px gradient fade
 # The "rest" height/width fills the remainder with solid black (no blur)
 
 TOP_SOLID=80
 FADE=30
 TOP_REST=$(( TARGET_H - TOP_SOLID - FADE ))
-BOTTOM_REST=$(( TARGET_H - FADE ))
 
-# Top Mask: 80px white (full blur) + 30px fade + rest black
+echo "Generating top bar mask..."
 magick -size "${TARGET_W}x${TOP_SOLID}" xc:white "$TMPDIR/mask_top_solid.png"
 magick -size "${TARGET_W}x${FADE}" gradient:white-black "$TMPDIR/mask_top_fade.png"
 magick -size "${TARGET_W}x${TOP_REST}" xc:black "$TMPDIR/mask_top_rest.png"
-magick "$TMPDIR/mask_top_solid.png" "$TMPDIR/mask_top_fade.png" "$TMPDIR/mask_top_rest.png" -append "$TMPDIR/mask_top.png"
-
-# Bottom Mask: rest black + 30px fade
-magick -size "${TARGET_W}x${BOTTOM_REST}" xc:black "$TMPDIR/mask_bottom_rest.png"
-magick -size "${TARGET_W}x${FADE}" gradient:black-white "$TMPDIR/mask_bottom_fade.png"
-magick "$TMPDIR/mask_bottom_rest.png" "$TMPDIR/mask_bottom_fade.png" -append "$TMPDIR/mask_bottom.png"
-
-# Left Mask: 30px fade on left edge
-magick -size "${FADE}x${TARGET_H}" -define gradient:direction=east gradient:white-black "$TMPDIR/mask_left_fade.png"
-magick "$TMPDIR/mask_left_fade.png" -background black -extent "${TARGET_W}x${TARGET_H}" "$TMPDIR/mask_left.png"
-
-# Right Mask: 30px fade on right edge
-magick -size "${FADE}x${TARGET_H}" -define gradient:direction=west gradient:white-black "$TMPDIR/mask_right_fade.png"
-magick "$TMPDIR/mask_right_fade.png" -gravity east -background black -extent "${TARGET_W}x${TARGET_H}" "$TMPDIR/mask_right.png"
-
-echo "Compositing masks together..."
-magick "$TMPDIR/mask_top.png" "$TMPDIR/mask_bottom.png" -compose Screen -composite \
-       "$TMPDIR/mask_left.png" -compose Screen -composite \
-       "$TMPDIR/mask_right.png" -compose Screen -composite \
-       "$TMPDIR/final_mask.png"
+magick "$TMPDIR/mask_top_solid.png" "$TMPDIR/mask_top_fade.png" "$TMPDIR/mask_top_rest.png" -append "$TMPDIR/final_mask.png"
 
 echo "Processing blurred background..."
 magick "$WORKING_FILE" -blur 0x25 "$TMPDIR/fully_blurred.png"

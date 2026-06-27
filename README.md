@@ -446,8 +446,8 @@ Environment variables force Qt apps to use `qt5ct`/`qt6ct` for consistent themin
 
 An ImageMagick pipeline that takes **any wallpaper** and converts it into two theme-ready images:
 
-1. **Desktop wallpaper** — with a frosted glass blur strip along all four edges (designed so Waybar and screen borders blend seamlessly into the wallpaper)
-2. **Lock screen wallpaper** — a heavily blurred, darkened variant tinted with the Tokyo Night base color (`#1a1b26` at 60% opacity), downscaled to 1080p
+1. **Desktop wallpaper** — with a frosted glass blur strip along the top edge (designed so Waybar blends seamlessly into the wallpaper)
+2. **Lock screen wallpaper** — a heavily blurred, darkened variant tinted with the Tokyo Night base color (`#1a1b26` at 60% opacity), downscaled to native resolution
 
 **Requirements:** `imagemagick` must be installed (`sudo pacman -S imagemagick`).
 
@@ -473,19 +473,15 @@ An ImageMagick pipeline that takes **any wallpaper** and converts it into two th
 │     • Option A: Crop to fill (preserves ratio)  │
 │     • Option B: Stretch to fit                  │
 │     ↓                                           │
-│  4. Generate edge masks:                        │
-│     • Top:    80px solid white + 30px fade       │
-│     • Bottom: 30px fade                          │
-│     • Left:   30px fade                          │
-│     • Right:  30px fade                          │
+│  4. Generate top bar mask:                      │
+│     • Top: 80px solid white + 30px fade         │
+│     • Rest: Solid black                         │
 │     ↓                                           │
-│  5. Composite masks via Screen blending          │
+│  5. Apply 25px Gaussian blur to masked top area │
 │     ↓                                           │
-│  6. Apply 25px Gaussian blur to masked regions   │
+│  6. OUTPUT: Desktop wallpaper (native res)       │
 │     ↓                                           │
-│  7. OUTPUT: Desktop wallpaper (native res)       │
-│     ↓                                           │
-│  8. BONUS: Generate lockscreen variant           │
+│  7. BONUS: Generate lockscreen variant           │
 │     • 40px blur + 60% Tokyo Night tint           │
 │     • Same native resolution                     │
 └─────────────────────────────────────────────────┘
