@@ -49,10 +49,10 @@
     },
     "pulseaudio": {
         "tooltip": false,
-        "format": "<span color='#7aa2f7'>{icon}</span>  {volume}%",
-        "format-bluetooth": "<span color='#7aa2f7'>{icon}󰂰</span>  {volume}%",
+        "format": "<span color='#7aa2f7'>{icon}</span>   {volume}%",
+        "format-bluetooth": "<span color='#7aa2f7'>{icon}󰂰</span>   {volume}%",
         "format-bluetooth-muted": "<span color='#F7768E'>󰖁󰂰</span>",
-        "format-muted": "<span color='#F7768E'>󰖁</span>  Muted",
+        "format-muted": "<span color='#F7768E'>󰖁</span>   Muted",
         "format-icons": {
             "headphone": "󰋋",
             "hands-free": "󰋋",
@@ -67,7 +67,7 @@
     },
     "backlight": {
         "tooltip": false,
-        "format": "<span color='#e0af68'>{icon}</span>  {percent}%",
+        "format": "<span color='#e0af68'>{icon}</span>   {percent}%",
         "format-icons": ["󰃞", "󰃟", "󰃠"],
         "on-click-middle": "~/.config/waybar/toggle_idle.sh",
         "on-scroll-up": "brightnessctl set 1%+",
