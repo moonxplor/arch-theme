@@ -474,7 +474,7 @@ An ImageMagick pipeline that takes **any wallpaper** and converts it into two th
 │     • Option B: Stretch to fit                  │
 │     ↓                                           │
 │  4. Generate top bar mask:                      │
-│     • Top: 80px solid white + 30px fade         │
+│     • Top: 40px solid white + 20px fade         │
 │     • Rest: Solid black                         │
 │     ↓                                           │
 │  5. Apply 25px Gaussian blur to masked top area │

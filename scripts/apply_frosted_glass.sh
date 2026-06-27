@@ -118,8 +118,8 @@ echo "Generating mask components..."
 # Waybar strip: 80px solid blur at the top + 30px gradient fade
 # The "rest" height/width fills the remainder with solid black (no blur)
 
-TOP_SOLID=80
-FADE=30
+TOP_SOLID=40
+FADE=20
 TOP_REST=$(( TARGET_H - TOP_SOLID - FADE ))
 
 echo "Generating top bar mask..."
