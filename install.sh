@@ -39,11 +39,12 @@ sleep 1
 if ! command -v yay &> /dev/null; then
     log_info "yay not found. Installing yay..."
     sudo pacman -S --needed --noconfirm base-devel git
-    git clone https://aur.archlinux.org/yay-bin.git /tmp/yay-bin
-    cd /tmp/yay-bin
+    TMP_YAY_DIR=$(mktemp -d -t yay-bin-XXXXXX)
+    git clone https://aur.archlinux.org/yay-bin.git "$TMP_YAY_DIR"
+    cd "$TMP_YAY_DIR"
     makepkg -si --noconfirm
-    rm -rf /tmp/yay-bin
     cd "$DOTFILES_DIR"
+    rm -rf "$TMP_YAY_DIR"
     log_success "yay installed!"
 else
     log_success "yay is already installed."

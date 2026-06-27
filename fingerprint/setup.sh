@@ -66,13 +66,13 @@ log_info "Compiling pam-fprint-grosshack from source..."
 # pam-fprint-grosshack depends on fprintd by default, which conflicts with open-fprintd
 # We need to manually download it, remove the dependency, and compile it
 if ! pacman -Qs pam-fprint-grosshack > /dev/null; then
-    cd /tmp
-    rm -rf pam-fprint-grosshack
-    git clone https://aur.archlinux.org/pam-fprint-grosshack.git
-    cd pam-fprint-grosshack
+    TMP_BUILD_DIR=$(mktemp -d -t pam-fprint-grosshack-XXXXXX)
+    git clone https://aur.archlinux.org/pam-fprint-grosshack.git "$TMP_BUILD_DIR"
+    cd "$TMP_BUILD_DIR"
     sed -i "s/'fprintd' //" PKGBUILD
     makepkg -si --noconfirm
     cd "$SCRIPT_DIR"
+    rm -rf "$TMP_BUILD_DIR"
 else
     log_success "pam-fprint-grosshack is already installed."
 fi

@@ -9,24 +9,50 @@ fi
 echo "Creating the tray patch script..."
 cat << 'INNER_EOF' > /usr/local/bin/patch-antigravity-tray.sh
 #!/bin/bash
+set -eo pipefail
+
 MAIN_USER=$(awk -F':' '{ if ($3 >= 1000 && $3 < 65534) { print $1; exit } }' /etc/passwd)
 MAIN_USER_HOME=$(eval echo "~$MAIN_USER")
 
 ASAR="/opt/Antigravity/resources/app.asar"
-TMP_DIR="/tmp/antigravity-asar-patch"
-TMP_ASAR="/tmp/app.asar.patched"
 SVG_FILE="$MAIN_USER_HOME/.local/share/icons/YAMIS-enlarged/apps/scalable/antigravity.svg"
 
-rm -rf "$TMP_DIR" "$TMP_ASAR"
+if [ ! -f "$ASAR" ]; then
+    echo "Warning: Antigravity ASAR not found at $ASAR. Skipping tray patch."
+    exit 0
+fi
+
+if [ ! -f "$SVG_FILE" ]; then
+    echo "Warning: SVG source file not found at $SVG_FILE. Skipping tray patch."
+    exit 0
+fi
+
+# Create a secure temp directory owned by the user
+TMP_PARENT=$(mktemp -d -t antigravity-patch-XXXXXX)
+chown "$MAIN_USER":"$MAIN_USER" "$TMP_PARENT"
+chmod 700 "$TMP_PARENT"
+
+TMP_DIR="$TMP_PARENT/extracted"
+TMP_ASAR="$TMP_PARENT/app.asar.patched"
+
+cleanup() {
+    rm -rf "$TMP_PARENT"
+}
+trap cleanup EXIT
+
+# Run asar extraction as the user
 sudo -u "$MAIN_USER" npx -y asar extract "$ASAR" "$TMP_DIR"
 
+# Modify files
 rsvg-convert -w 16 -h 16 "$SVG_FILE" -o "$TMP_DIR/trayTemplate.png"
 rsvg-convert -w 32 -h 32 "$SVG_FILE" -o "$TMP_DIR/trayTemplate@2x.png"
 rsvg-convert -w 48 -h 48 "$SVG_FILE" -o "$TMP_DIR/icon.png"
 
+# Repack as the user
 sudo -u "$MAIN_USER" npx -y asar pack "$TMP_DIR" "$TMP_ASAR"
+
+# Overwrite system ASAR
 mv "$TMP_ASAR" "$ASAR"
-rm -rf "$TMP_DIR"
 INNER_EOF
 
 chmod +x /usr/local/bin/patch-antigravity-tray.sh

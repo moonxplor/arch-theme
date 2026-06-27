@@ -28,7 +28,10 @@ if [ "$1" = "post" ]; then
             for socket in /run/user/$SWAYLOCK_UID/wayland-*; do
                 if [ -S "$socket" ]; then
                     WAYLAND_DISPLAY=$(basename "$socket")
-                    su - "$SWAYLOCK_USER" -c "XDG_RUNTIME_DIR=/run/user/$SWAYLOCK_UID WAYLAND_DISPLAY=\"$WAYLAND_DISPLAY\" wtype -k Return"
+                    # Strict validation to prevent command injection from malicious socket names
+                    if [[ "$WAYLAND_DISPLAY" =~ ^wayland-[0-9]+$ ]]; then
+                        su - "$SWAYLOCK_USER" -c "XDG_RUNTIME_DIR=/run/user/$SWAYLOCK_UID WAYLAND_DISPLAY='$WAYLAND_DISPLAY' wtype -k Return"
+                    fi
                 fi
             done
         fi
