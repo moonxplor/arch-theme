@@ -7,7 +7,7 @@ if pgrep -x rofi > /dev/null; then
 fi
 
 # Define the available TLP power modes with Nerd Font icons
-options="󰓅  performance\n󰾅  balanced\n󰌪  power-saver"
+options="󰓅     performance\n󰾅     balanced\n󰌪     power-saver"
 
 # Use rofi to display the options and get the user's selection.
 # We inject a northeast dropdown location and disable the search bar (inputbar).
