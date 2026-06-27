@@ -332,7 +332,7 @@ Swaylock is configured **inline via CLI flags** — there is no standalone `sway
 - [`rofi/powermenu.sh`](rofi/powermenu.sh) — manual lock from power menu
 - [`wlogout/layout`](wlogout/layout) — lock button in logout overlay
 
-**Lock Wallpaper:** `~/Pictures/wallpapers/satisfaction_hires_lock_final.png`
+**Lock Wallpaper:** `~/Pictures/wallpapers/satisfaction_waybar_blur_lock.png`
 
 Optional fingerprint unlock support is available via [`fingerprint/`](fingerprint/).
 

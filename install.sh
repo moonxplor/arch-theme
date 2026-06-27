@@ -159,7 +159,7 @@ log_success "Configs successfully linked!"
 # --- 7. Install Wallpaper & Generate Bookmarks ---
 log_info "Installing wallpapers..."
 cp "$DOTFILES_DIR/wallpapers/satisfaction_waybar_blur.png" "$HOME/Pictures/wallpapers/satisfaction_waybar_blur.png"
-cp "$DOTFILES_DIR/wallpapers/satisfaction_hires_lock_final.png" "$HOME/Pictures/wallpapers/satisfaction_hires_lock_final.png"
+cp "$DOTFILES_DIR/wallpapers/satisfaction_waybar_blur_lock.png" "$HOME/Pictures/wallpapers/satisfaction_waybar_blur_lock.png"
 log_success "Wallpapers installed!"
 
 log_info "Generating file manager bookmarks..."
