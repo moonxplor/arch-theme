@@ -10,6 +10,7 @@ RESET="\e[0m"
 
 log_info() { echo -e "${BLUE}[*] $1${RESET}"; }
 log_success() { echo -e "${GREEN}[+] $1${RESET}"; }
+log_warn() { echo -e "\e[33m[!] $1${RESET}"; }
 log_error() { echo -e "${RED}[!] $1${RESET}"; }
 
 prompt_yn() {
