@@ -12,15 +12,18 @@ log_success() { echo -e "${GREEN}[+] $1${RESET}"; }
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 SWAY_CONFIG="$HOME/.config/sway/config"
 
-log_info "Fixing broken Windows key..."
-# Map Caps Lock to Super instead of using Alt, which avoids breaking their Alt clipboard shortcuts
+log_info "Fixing broken Windows key by changing Sway modifier to Alt (Mod1)..."
 if [ -f "$SWAY_CONFIG" ]; then
-    if grep -q "caps:super" "$SWAY_CONFIG"; then
-        log_info "Caps Lock is already mapped to Super in sway/config."
-    else
-        echo -e "\n# Fix for broken Windows key\ninput type:keyboard {\n    xkb_options caps:super\n}" >> "$SWAY_CONFIG"
-        log_success "Mapped Caps Lock to Super in Sway! You can now use Caps Lock as your Windows/Mod key."
-    fi
+    # Change the main modifier to Mod1 (Alt)
+    sed -i 's/set $mod Mod4/set $mod Mod1/g' "$SWAY_CONFIG"
+    
+    # Change the clipboard shortcut to $mod+Shift+v so it doesn't conflict with normal Alt+V pasting
+    sed -i 's/bindsym $mod+v exec ~\/.config\/sway\/rofi-manager.sh clipboard/bindsym $mod+Shift+v exec ~\/.config\/sway\/rofi-manager.sh clipboard/g' "$SWAY_CONFIG"
+    
+    # Remove the caps:super workaround if it was added previously
+    sed -i '/xkb_options caps:super/d' "$SWAY_CONFIG"
+    
+    log_success "Changed Sway modifier to Alt (Mod1) and remapped clipboard to Alt+Shift+V!"
 else
     log_info "Sway config not found at $SWAY_CONFIG. Assuming dotfiles are not fully installed yet."
 fi
