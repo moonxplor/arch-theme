@@ -252,4 +252,7 @@ systemctl --user daemon-reload
 systemctl --user enable --now sway-hw-notify.service
 log_success "Systemd services enabled!"
 
-log_success "Installation Complete! Reboot or log out to enjoy your pristine Sway setup!"
+log_success "Installation Complete!"
+log_info "NOTE: After reboot, you will be greeted by the Lemurs display manager."
+log_info "Use the left/right arrow keys to select 'sway' (SwayFX) before entering your password."
+log_info "Reboot or log out to enjoy your pristine Sway setup!"
