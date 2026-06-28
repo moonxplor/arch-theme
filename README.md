@@ -68,7 +68,6 @@ The installer will:
 4. Back up any existing configs to `*.bak` (and prevent nested backups).
 5. Symlink everything from this repo into `~/.config/`.
 6. Set up Lemurs display manager, TLP, and systemd services.
-7. Optionally configure fingerprint authentication.
 
 > **Note:** After installation, reboot or log out to enter your new Sway session.
 
@@ -334,8 +333,6 @@ Swaylock is configured **inline via CLI flags** — there is no standalone `sway
 
 **Lock Wallpaper:** `~/Pictures/wallpapers/satisfaction_waybar_blur_lock.png`
 
-Optional fingerprint unlock support is available via [`fingerprint/`](fingerprint/).
-
 > **To change the lock wallpaper:** Update the image path in all three files listed above.
 
 ---
@@ -440,6 +437,7 @@ Environment variables force Qt apps to use `qt5ct`/`qt6ct` for consistent themin
 | `toggle_idle.sh` | `waybar/` | Toggle idle inhibitor on/off | Backlight middle-click |
 | `powermenu.sh` | `rofi/` | Rofi power menu (lock/logout/reboot/shutdown) | `Super+Power` button |
 | `apply_frosted_glass.sh` | `scripts/` | Wallpaper generator (frosted glass + lockscreen) | Manual |
+| `fix_keys.sh` | `scripts/` | Fix broken Windows key (maps CapsLock to Super) & Terminal colors | Manual |
 
 ### Wallpaper Generator (`scripts/apply_frosted_glass.sh`)
 
@@ -661,12 +659,13 @@ arch-theme/
 ├── 📁 xfce4/                    # Xfce4/Thunar system registry configuration XMLs
 ├── 🏠 applications/             # Custom .desktop launchers
 ├── 📜 scripts/                  # Utility scripts
+│   ├── apply_frosted_glass.sh   # Wallpaper generator
+│   └── fix_keys.sh              # Fix broken Windows key
 ├── 🖥️ systemd/                  # User systemd services
 ├── 🌌 wallpapers/               # Wallpaper images
 ├── 🐚 zshrc                     # Zsh shell configuration
 ├── 🚀 starship.toml             # Shell prompt configuration
 ├── 📋 mimeapps.list             # Default application associations
-├── 👆 fingerprint/              # Fingerprint auth setup
 ├── ⚡ etc/tlp.conf              # TLP power management
 └── 📦 install.sh                # One-shot installer
 ```
