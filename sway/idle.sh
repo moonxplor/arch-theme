@@ -4,7 +4,7 @@ pkill -x swayidle
 
 swayidle -w \
          timeout 180 'brightnessctl -s set 10' resume 'brightnessctl -r' \
-         timeout 300 "swaylock -f -i $HOME/Pictures/wallpapers/satisfaction_waybar_blur_lock.png" \
+         timeout 300 "swaylock -f -i $HOME/Pictures/wallpapers/active_wallpaper_lock.png" \
          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
          timeout 900 'systemctl suspend' \
-         before-sleep "swaylock -f -i $HOME/Pictures/wallpapers/satisfaction_waybar_blur_lock.png"
+         before-sleep "swaylock -f -i $HOME/Pictures/wallpapers/active_wallpaper_lock.png"

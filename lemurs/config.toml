@@ -201,7 +201,7 @@ mover_color = "#414868"
 mover_modifiers = ""
 
 # Mover's color and modifiers whilst the selector is focused
-mover_color_focused = "#39c5bb"
+mover_color_focused = "#bb9af7"
 mover_modifiers_focused = "bold"
 
 # The characters used to display the movers. Suggestions are:
@@ -235,7 +235,7 @@ selected_color = "#a9b1d6"
 selected_modifiers = "underlined"
 
 # Selected's color and modifiers whilst the selector is focused
-selected_color_focused = "#39c5bb"
+selected_color_focused = "#bb9af7"
 selected_modifiers_focused = "bold"
 
 # The length of the name of the desktop environment which is displayed.

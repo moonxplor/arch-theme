@@ -33,17 +33,17 @@ default_floating_border pixel 2px
 corner_radius 10
 
 # class                 border  bground text    indicator child_border
-client.focused          #39c5bb #39c5bb #1a1b26 #bb9af7   #39c5bb
+client.focused          #bb9af7 #bb9af7 #1a1b26 #bb9af7   #bb9af7
 client.focused_inactive #414868 #414868 #c0caf5 #bb9af7   #414868
 client.unfocused        #24283b #24283b #a9b1d6 #bb9af7   #24283b
 client.urgent           #f7768e #f7768e #c0caf5 #bb9af7   #f7768e
 client.placeholder      #bb9af7 #bb9af7 #1a1b26 #bb9af7   #bb9af7
 
 # SwayFX Enhancements (Vibrancy, Blur, and Depth)
-blur enable
+blur disable
 blur_radius 7
 blur_passes 4
-shadows enable
+shadows disable
 shadow_blur_radius 20
 shadow_color #15161ecc
 for_window [tiling] dim_inactive 0.15
@@ -70,7 +70,7 @@ set $browser zen-browser
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg ~/code/arch-theme/wallpapers/satisfaction_waybar_blur.png fill
+output * bg ~/Pictures/wallpapers/active_wallpaper.png fill
 output 'AU Optronics 0x323D Unknown' resolution 1920x1080@60.050Hz position 0,0 scale 1.25
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputsqwfr

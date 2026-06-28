@@ -13,14 +13,14 @@ configuration {
 * {
     bg: #1A1B26;
     bg-alt: #1A1B26;
-    bg-selected: #39c5bb;
+    bg-selected: #bb9af7;
 
     fg: #C0CAF5;
     fg-muted: #565F89;
     fg-selected: #1A1B26;
 
-    border-color: #39c5bb;
-    border-selected: #39c5bb;
+    border-color: #bb9af7;
+    border-selected: #bb9af7;
 
     background-color: transparent;
     text-color: @fg;

@@ -23,8 +23,8 @@ button {
 }
 
 button:focus, button:active, button:hover {
-    background-color: #39c5bb;
-    border-color: #39c5bb;
+    background-color: #bb9af7;
+    border-color: #bb9af7;
     color: transparent;
     outline-style: none;
 }

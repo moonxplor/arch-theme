@@ -1,6 +1,6 @@
 {
     "label" : "lock",
-    "action" : "swaylock -f -i $HOME/Pictures/wallpapers/satisfaction_waybar_blur_lock.png",
+    "action" : "swaylock -f -i $HOME/Pictures/wallpapers/active_wallpaper_lock.png",
     "text" : "Lock",
     "keybind" : "l"
 }

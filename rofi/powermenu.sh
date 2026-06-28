@@ -32,6 +32,6 @@ case $chosen in
         swaymsg exit
         ;;
     Lock)
-        swaylock -f -i "$HOME/Pictures/wallpapers/satisfaction_waybar_blur_lock.png"
+        swaylock -f -i "$HOME/Pictures/wallpapers/active_wallpaper_lock.png"
         ;;
 esac

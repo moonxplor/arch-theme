@@ -12,11 +12,11 @@ options="󰓅     performance\n󰾅     balanced\n󰌪     power-saver"
 # Use rofi to display the options and get the user's selection.
 # We inject a northeast dropdown location and disable the search bar (inputbar).
 selected=$(echo -e "$options" | rofi -dmenu -i -p "Power Profile" \
-    -theme-str 'window {width: 250px; location: northeast; anchor: northeast; x-offset: -75px; y-offset: 5px; border-radius: 12px; border: 2px; border-color: #39c5bb;}' \
+    -theme-str 'window {width: 250px; location: northeast; anchor: northeast; x-offset: -75px; y-offset: 5px; border-radius: 12px; border: 2px; border-color: #bb9af7;}' \
     -theme-str 'inputbar { enabled: false; }' \
     -theme-str 'listview {lines: 3;}' \
     -theme-str 'element { children: [ element-text ]; }' \
-    -theme-str 'element selected {background-color: #39c5bb; text-color: #1a1b26;}')
+    -theme-str 'element selected {background-color: #bb9af7; text-color: #1a1b26;}')
 
 # If the user selected a valid option, apply it
 if [ -n "$selected" ]; then

@@ -1,11 +1,11 @@
 <h1 align="center">
   <br>
-  🌊 Miku × Tokyo Night — Arch Linux Sway Dotfiles
+  🌊 Modern Purple × Tokyo Night — Arch Linux Sway Dotfiles
   <br>
 </h1>
 
 <p align="center">
-  <b>A meticulously crafted, Hatsune Miku–inspired Sway desktop environment built on the Tokyo Night color palette.</b>
+  <b>A meticulously crafted, Modern Purple–inspired Sway desktop environment built on the Tokyo Night color palette.</b>
 </p>
 
 <p align="center">
@@ -18,7 +18,7 @@
 
 ## 🖼️ Wallpaper
 
-![Miku Wallpaper](wallpapers/satisfaction_hires_final.png)
+![Modern Purple Wallpaper](wallpapers/satisfaction_hires_final.png)
 
 ---
 
@@ -76,15 +76,15 @@ The installer will:
 
 ## 🎨 Color Palette
 
-Every component in this dotfiles collection uses the same unified color palette, derived from **Tokyo Night** and accented with **Miku Teal**.
+Every component in this dotfiles collection uses the same unified color palette, derived from **Tokyo Night** and accented with **Modern Purple**.
 
 | Role | Hex | Preview | Used In |
 |------|-----|---------|---------|
 | **Base Background** | `#1a1b26` | 🟫 | Everywhere — Sway, Waybar, Kitty, Rofi, Lemurs |
 | **Deep Background** | `#15161e` | ⬛ | Waybar borders, Rofi panel backgrounds |
 | **Surface / Gutter** | `#414868` | 🔘 | Unfocused UI elements, dim text |
-| **Miku Teal (Primary)** | `#39c5bb` | 🟩 | Focused borders, active workspace, accents |
-| **Bright Teal** | `#33e0e0` | 🟦 | Hover states, Waybar border glow |
+| **Modern Purple (Primary)** | `#bb9af7` | 🟩 | Focused borders, active workspace, accents |
+| **Bright Teal** | `#9d7cd8` | 🟦 | Hover states, Waybar border glow |
 | **Sky Cyan** | `#7dcfff` | 🔵 | Links, secondary highlights, unfocused labels |
 | **Blue** | `#7aa2f7` | 🔷 | Focused input labels, secondary accents |
 | **Purple** | `#bb9af7` | 🟣 | Sway indicator color |
@@ -150,7 +150,7 @@ The heart of the desktop. SwayFX is used (not vanilla Sway) for blur and rounded
 
 | State | Border | Background | Text |
 |-------|--------|------------|------|
-| Focused | `#39c5bb` | `#39c5bb` | `#1a1b26` |
+| Focused | `#bb9af7` | `#bb9af7` | `#1a1b26` |
 | Focused Inactive | `#414868` | `#414868` | `#c0caf5` |
 | Unfocused | `#24283b` | `#24283b` | `#a9b1d6` |
 | Urgent | `#f7768e` | `#f7768e` | `#c0caf5` |
@@ -209,13 +209,13 @@ A top-mounted, rounded-pill-style bar with transparent spacing between modules.
 | Module Background | `#1a1b26` | 23 |
 | Module Border | `2px solid #15161e` | 27 |
 | Module Border Radius | 12px | 26 |
-| Hover Border | `2px solid #33e0e0` | 63 |
-| Active Workspace BG | `#39c5bb` | 82 |
+| Hover Border | `2px solid #9d7cd8` | 63 |
+| Active Workspace BG | `#bb9af7` | 82 |
 | Active Workspace Text | `#1a1b26` | 83 |
 
 > **To change the bar font:** Edit `waybar/style.css` line 4.
 > **To change module layout:** Edit the `modules-left/center/right` arrays in `waybar/config`.
-> **To change accent color:** Replace `#39c5bb` and `#33e0e0` in `waybar/style.css`.
+> **To change accent color:** Replace `#bb9af7` and `#9d7cd8` in `waybar/style.css`.
 
 ---
 
@@ -257,7 +257,7 @@ Rofi is used for three functions, all managed through [`sway/rofi-manager.sh`](s
 | Opacity | 0.95 (95%) | 20 |
 | Background | `#1a1b26` | 23 |
 | Foreground | `#c0caf5` | 24 |
-| Cursor | `#39c5bb` | 25 |
+| Cursor | `#bb9af7` | 25 |
 | Selection | Teal on dark | 27–28 |
 | Window Decorations | Hidden | 16 |
 
@@ -267,7 +267,7 @@ Rofi is used for three functions, all managed through [`sway/rofi-manager.sh`](s
 |-------|--------|--------|-------|
 | 0/8 | `#1a1b26` | `#414868` | Black/Gray |
 | 1/9 | `#f7768e` | `#f7768e` | Red |
-| 2/10 | `#39c5bb` | `#39c5bb` | Green (Miku Teal) |
+| 2/10 | `#bb9af7` | `#bb9af7` | Green (Modern Purple) |
 | 3/11 | `#e0af68` | `#e0af68` | Yellow |
 | 4/12 | `#7aa2f7` | `#7aa2f7` | Blue |
 | 5/13 | `#bb9af7` | `#bb9af7` | Purple |
@@ -304,8 +304,8 @@ A minimal TUI-based display manager. Styled to match the Kitty terminal palette 
 | Focused Content | `#c0caf5` (Foreground) |
 | Unfocused Title | `#7dcfff` (Cyan) |
 | Unfocused Content | `#414868` (Gray) |
-| Environment Switcher Active | `#39c5bb` (Miku Teal) |
-| Movers (Active) | `#39c5bb` |
+| Environment Switcher Active | `#bb9af7` (Modern Purple) |
+| Movers (Active) | `#bb9af7` |
 | Error State | `#f7768e` (Red) |
 | Password Char | `*` |
 | Max Field Width | 48 |
@@ -352,11 +352,11 @@ Fullscreen logout/power overlay triggered by the Rofi power menu.
 
 ### Btop (System Monitor)
 
-**Config:** [`btop/btop.conf`](btop/btop.conf) · **Theme:** [`btop/themes/miku-dark.theme`](btop/themes/miku-dark.theme)
+**Config:** [`btop/btop.conf`](btop/btop.conf) · **Theme:** [`btop/themes/purple-dark.theme`](btop/themes/purple-dark.theme)
 
-Launched with `Super + Escape`. Uses a custom Miku Dark theme file.
+Launched with `Super + Escape`. Uses a custom Purple Dark theme file.
 
-> **To change btop colors:** Edit `btop/themes/miku-dark.theme`.
+> **To change btop colors:** Edit `btop/themes/purple-dark.theme`.
 
 ---
 
@@ -374,10 +374,10 @@ Cross-shell prompt using a **powerline pill** style with Nerd Font icons.
 
 | Segment | Background | Foreground |
 |---------|-----------|------------|
-| OS + User + Host | `#39c5bb` | `#1a1b26` |
+| OS + User + Host | `#bb9af7` | `#1a1b26` |
 | Directory | `#414868` | `#c0caf5` |
 | Languages + Git | `#bb9af7` | `#1a1b26` |
-| Success prompt char | — | `#39c5bb` ❯ |
+| Success prompt char | — | `#bb9af7` ❯ |
 | Error prompt char | — | `#f7768e` ❯ |
 
 > **To customize the prompt:** Edit `starship.toml`. See [starship.rs](https://starship.rs) for docs.
@@ -439,7 +439,6 @@ Environment variables force Qt apps to use `qt5ct`/`qt6ct` for consistent themin
 | `tlp_menu.sh` | `waybar/` | Rofi dropdown for TLP power profile switching | Waybar battery click |
 | `toggle_idle.sh` | `waybar/` | Toggle idle inhibitor on/off | Backlight middle-click |
 | `powermenu.sh` | `rofi/` | Rofi power menu (lock/logout/reboot/shutdown) | `Super+Power` button |
-| `install-miku-tray-patch.sh` | `scripts/` | Patches system tray icons to Miku theme | Manual |
 | `apply_frosted_glass.sh` | `scripts/` | Wallpaper generator (frosted glass + lockscreen) | Manual |
 
 ### Wallpaper Generator (`scripts/apply_frosted_glass.sh`)
@@ -634,7 +633,7 @@ arch-theme/
 │
 ├── 📈 btop/                     # System monitor
 │   ├── btop.conf                #   Settings
-│   └── themes/miku-dark.theme   #   Custom Miku color theme
+│   └── themes/purple-dark.theme   #   Custom Modern Purple color theme
 │
 ├── 🔤 fontconfig/               # System font overrides
 │   └── conf.d/
@@ -678,10 +677,10 @@ arch-theme/
 
 ### I want to change the accent color
 
-The primary accent is **Miku Teal `#39c5bb`**. To change it:
+The primary accent is **Modern Purple `#bb9af7`**. To change it:
 
-1. Search and replace `#39c5bb` across all files
-2. Also replace the hover variant `#33e0e0`
+1. Search and replace `#bb9af7` across all files
+2. Also replace the hover variant `#9d7cd8`
 3. Key files to update:
    - `sway/config` (border colors)
    - `waybar/style.css` (active workspace, hover)
@@ -746,7 +745,7 @@ Edit `lemurs/config.toml`. The PAM file at `lemurs/pam` controls authentication.
 - **Icon Theme:** [TokyoNight-SE](https://github.com/ljmill/tokyo-night-icons) (YAMIS enlarged variant)
 - **GTK Theme:** [adw-gtk3-dark](https://github.com/lassekongo83/adw-gtk3)
 - **Cursor Theme:** [Breeze](https://github.com/KDE/breeze)
-- **Wallpaper Art:** Hatsune Miku "Satisfaction" illustration
+- **Wallpaper Art:** Modern Purple "Satisfaction" illustration
 
 ---
 

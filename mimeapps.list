@@ -29,7 +29,6 @@ x-scheme-handler/geo=google-maps-geo-handler.desktop;
 x-scheme-handler/http=zen.desktop
 x-scheme-handler/https=zen.desktop
 x-scheme-handler/mailto=zen.desktop
-x-scheme-handler/antigravity=antigravity.desktop
 image/gif=imv.desktop
 image/svg+xml=imv.desktop
 application/zip=xarchiver.desktop

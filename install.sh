@@ -32,8 +32,17 @@ fi
 
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-log_info "Welcome to the Miku Arch Dotfiles Installer!"
+log_info "Welcome to the Purple Arch Dotfiles Installer!"
 sleep 1
+
+# --- 0. System Analysis ---
+log_info "Analyzing target system..."
+if [ -x "$DOTFILES_DIR/scripts/analyze_system.sh" ]; then
+    bash "$DOTFILES_DIR/scripts/analyze_system.sh"
+else
+    log_warn "analyze_system.sh not found, skipping analysis."
+fi
+sleep 2
 
 # --- 1. Pacman Configurations & Repositories ---
 log_info "Configuring Pacman parallel downloads and repositories..."
@@ -150,6 +159,14 @@ for config in sway swaylock waybar kitty rofi swaync wlogout btop environment.d 
     backup_and_symlink "$DOTFILES_DIR/$config" "$HOME/.config/$config"
 done
 
+log_info "Backing up KDE configurations if present..."
+for kde_conf in kdeglobals plasmashellrc kwinrc; do
+    if [ -f "$HOME/.config/$kde_conf" ]; then
+        mv "$HOME/.config/$kde_conf" "$HOME/.config/${kde_conf}.bak"
+        log_info "Backed up KDE config: $kde_conf"
+    fi
+done
+
 # Independent dotfiles
 backup_and_symlink "$DOTFILES_DIR/starship.toml" "$HOME/.config/starship.toml"
 backup_and_symlink "$DOTFILES_DIR/zshrc" "$HOME/.zshrc"
@@ -158,8 +175,18 @@ log_success "Configs successfully linked!"
 
 # --- 7. Install Wallpaper & Generate Bookmarks ---
 log_info "Installing wallpapers..."
-cp "$DOTFILES_DIR/wallpapers/satisfaction_waybar_blur.png" "$HOME/Pictures/wallpapers/satisfaction_waybar_blur.png"
-cp "$DOTFILES_DIR/wallpapers/satisfaction_waybar_blur_lock.png" "$HOME/Pictures/wallpapers/satisfaction_waybar_blur_lock.png"
+TARGET_WP="/home/moonxplor/Pictures/Wallpaper/IMG_2565.PNG"
+if [ -f "$TARGET_WP" ]; then
+    log_info "Generating theme wallpapers using $TARGET_WP..."
+    if ! command -v magick &> /dev/null; then
+        sudo pacman -S --needed --noconfirm imagemagick jq
+    fi
+    bash "$DOTFILES_DIR/scripts/apply_frosted_glass.sh" "$TARGET_WP" "$HOME/Pictures/wallpapers/active_wallpaper.png"
+else
+    log_warn "Target wallpaper $TARGET_WP not found. Falling back to default."
+    cp "$DOTFILES_DIR/wallpapers/satisfaction_waybar_blur.png" "$HOME/Pictures/wallpapers/active_wallpaper.png"
+    cp "$DOTFILES_DIR/wallpapers/satisfaction_waybar_blur_lock.png" "$HOME/Pictures/wallpapers/active_wallpaper_lock.png"
+fi
 log_success "Wallpapers installed!"
 
 log_info "Generating file manager bookmarks..."
@@ -175,17 +202,8 @@ EOF
 # --- 8. Custom Icons & Desktop Launchers ---
 log_info "Symlinking custom icons and desktop files..."
 backup_and_symlink "$DOTFILES_DIR/icons/YAMIS-enlarged" "$HOME/.local/share/icons/YAMIS-enlarged"
-backup_and_symlink "$DOTFILES_DIR/applications/miku.desktop" "$HOME/.local/share/applications/miku.desktop"
 gtk-update-icon-cache -f -t "$HOME/.local/share/icons/YAMIS-enlarged" || true
 log_success "Custom icons linked!"
-
-# --- 9. System Configurations & Patch Scripts ---
-if prompt_yn "Install Miku Tray Icon Patch (Specific to Miku theme)?"; then
-    log_info "Installing system configurations and patch scripts..."
-    sudo cp "$DOTFILES_DIR/scripts/install-miku-tray-patch.sh" "/usr/local/bin/install-miku-tray-patch.sh"
-    sudo chmod +x "/usr/local/bin/install-miku-tray-patch.sh"
-    log_success "Tray patch installed!"
-fi
 
 if prompt_yn "Restore TLP Power Management Configuration?"; then
     log_info "Restoring TLP power management system config..."
@@ -218,8 +236,9 @@ sudo cp "$DOTFILES_DIR/lemurs/pam" /etc/pam.d/lemurs
 sudo chmod 644 /etc/pam.d/lemurs
 
 # Disable old display managers
-sudo systemctl disable ly.service 2>/dev/null || true
-sudo systemctl disable greetd.service 2>/dev/null || true
+for dm in ly greetd sddm gdm lightdm; do
+    sudo systemctl disable "$dm.service" 2>/dev/null || true
+done
 
 # Enable lemurs
 sudo systemctl enable lemurs.service

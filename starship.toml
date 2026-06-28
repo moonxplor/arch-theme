@@ -4,12 +4,12 @@ add_newline = false
 
 # The Layout: Pill start -> User/Host -> Directory -> Languages/Git -> Time -> Prompt
 format = """
-[](#39c5bb)\
+[](#bb9af7)\
 $os\
 $username\
-[@](bg:#39c5bb fg:#1a1b26)\
+[@](bg:#bb9af7 fg:#1a1b26)\
 $hostname\
-[](bg:#414868 fg:#39c5bb)\
+[](bg:#414868 fg:#bb9af7)\
 $directory\
 [](bg:#bb9af7 fg:#414868)\
 $c\
@@ -23,7 +23,7 @@ $character"""
 
 [os]
 disabled = false
-style = "bg:#39c5bb fg:#1a1b26"
+style = "bg:#bb9af7 fg:#1a1b26"
 format = "[$symbol]($style)"
 
 [os.symbols]
@@ -31,12 +31,12 @@ Arch = "󰣇 "
 
 [username]
 show_always = true
-style_user = "bg:#39c5bb fg:#1a1b26 bold"
+style_user = "bg:#bb9af7 fg:#1a1b26 bold"
 format = '[$user]($style)'
 
 [hostname]
 ssh_only = false
-style = "bg:#39c5bb fg:#1a1b26 bold"
+style = "bg:#bb9af7 fg:#1a1b26 bold"
 format = '[$hostname ]($style)'
 
 [directory]
@@ -74,5 +74,5 @@ min_time = 2_000
 format = " [󱎫 $duration](bold #e0af68)"
 
 [character]
-success_symbol = "[ ❯](bold #39c5bb)"
+success_symbol = "[ ❯](bold #bb9af7)"
 error_symbol = "[ ❯](bold #f7768e)"

@@ -60,7 +60,7 @@ window#waybar {
 #custom-swaync:hover,
 #bluetooth:hover,
 #custom-power:hover {
-    border: 2px solid #33e0e0;
+    border: 2px solid #9d7cd8;
 }
 
 #workspaces button {
@@ -79,7 +79,7 @@ window#waybar {
 
 #workspaces button.focused,
 #workspaces button.active {
-    background-color: #39c5bb;
+    background-color: #bb9af7;
     color: #1a1b26;
     font-weight: bold;
 }

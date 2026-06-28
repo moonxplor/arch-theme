@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════
-   Miku GTK3 Theme — Tokyo Night × Hatsune Miku
+   Purple GTK3 Theme — Tokyo Night × Hatsune Purple
    Global coherent color system for all GTK3 apps
    Base theme: adw-gtk3-dark
    ═══════════════════════════════════════════════════════ */
@@ -9,12 +9,12 @@
 @define-color theme_fg_color #C0CAF5;
 @define-color theme_base_color #1A1B26;
 @define-color theme_text_color #C0CAF5;
-@define-color theme_selected_bg_color #33E0E0;
+@define-color theme_selected_bg_color #9D7CD8;
 @define-color theme_selected_fg_color #1A1B26;
 
 /* ── Named Color Definitions (adw-gtk3 compatibility) ── */
-@define-color accent_color #33E0E0;
-@define-color accent_bg_color #33E0E0;
+@define-color accent_color #9D7CD8;
+@define-color accent_bg_color #9D7CD8;
 @define-color accent_fg_color #15161E;
 
 @define-color destructive_color #F7768E;
@@ -76,7 +76,7 @@ window.csd {
 /* Treeview rows (Thunar sidebar, list view) */
 treeview:selected,
 treeview:selected * {
-    background-color: #33E0E0;
+    background-color: #9D7CD8;
     color: #1A1B26;
 }
 
@@ -87,21 +87,21 @@ iconview:selected *,
 .view:selected *,
 ExoIconView:selected,
 ExoIconView:selected * {
-    background-color: #33E0E0;
+    background-color: #9D7CD8;
     color: #1A1B26;
 }
 
 /* Generic row selections (other GTK3 apps) */
 row:selected,
 row:selected * {
-    background-color: #33E0E0;
+    background-color: #9D7CD8;
     color: #1A1B26;
 }
 
 /* Text selections inside entries/textviews */
 entry selection,
 textview selection {
-    background-color: #33E0E0;
+    background-color: #9D7CD8;
     color: #1A1B26;
 }
 
@@ -113,7 +113,7 @@ textview selection {
 
 /* Top menubar item hover (File, Edit, View...) */
 menubar > menuitem:hover {
-    background-color: #33E0E0;
+    background-color: #9D7CD8;
     color: #1A1B26;
 }
 menubar > menuitem:hover > label,
@@ -131,7 +131,7 @@ menu {
 /* Individual dropdown menu item hover */
 .menu menuitem:hover,
 menu menuitem:hover {
-    background-color: #33E0E0;
+    background-color: #9D7CD8;
     color: #1A1B26;
 }
 .menu menuitem:hover > *,
@@ -154,7 +154,7 @@ menu menuitem > * {
    ═══════════════════════════════════════════════════════ */
 image {
     -gtk-icon-style: symbolic;
-    color: #33E0E0; /* Miku Teal */
+    color: #9D7CD8; /* Modern Purple */
 }
 
 *:selected image,
