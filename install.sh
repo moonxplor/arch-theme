@@ -110,7 +110,7 @@ PACKAGES=(
     # Display Manager
     "lemurs"
     # System/UX Utilities
-    "swayidle" "swaylock" "brightnessctl" "swaync" "wlogout" "polkit-kde-agent" "network-manager-applet" "sway-audio-idle-inhibit-git" "xdg-desktop-portal" "xdg-desktop-portal-wlr" "jq"
+    "swayidle" "swaylock" "brightnessctl" "swaync" "wlogout" "polkit-kde-agent" "network-manager-applet" "sway-audio-idle-inhibit-git" "xdg-desktop-portal" "xdg-desktop-portal-wlr" "jq" "autotiling"
     # Clipboard
     "wl-clipboard" "cliphist"
     # Default Apps

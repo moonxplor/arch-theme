@@ -324,6 +324,9 @@ exec wl-paste --type image --watch cliphist store
 
 bindsym $mod+period exec ~/.config/sway/rofi-manager.sh emoji
 
+# Golden Ratio / Spiral Tiling
+exec autotiling
+
 # Hardware Notifications (USB & Power)
 
 # --- Idle Inhibition & Media Rules ---
