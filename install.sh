@@ -64,11 +64,19 @@ fi
 if ! grep -q "^\[chaotic-aur\]" /etc/pacman.conf; then
     log_info "Setting up Chaotic AUR..."
     # 1. Receive key
-    sudo pacman-key --recv-key 3056513E7043D7A13B266D9614E7517E4F707477 --keyserver keyserver.ubuntu.com || true
-    sudo pacman-key --lsign-key 3056513E7043D7A13B266D9614E7517E4F707477 || true
+    KEY="3056513E7043D7A13B266D9614E7517E4F707477"
+    for server in keyserver.ubuntu.com hkps://keyserver.ubuntu.com hkps://keys.openpgp.org hkp://pgp.mit.edu; do
+        log_info "Trying to fetch key from $server..."
+        if sudo pacman-key --recv-key "$KEY" --keyserver "$server"; then
+            log_success "Key fetched successfully!"
+            break
+        fi
+        log_warn "Failed to fetch from $server, trying next..."
+    done
+    sudo pacman-key --lsign-key "$KEY" || true
     # 2. Install keyring and mirrorlist
-    sudo pacman -U --noconfirm 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst' || true
-    sudo pacman -U --noconfirm 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst' || true
+    sudo pacman -U --noconfirm 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst'
+    sudo pacman -U --noconfirm 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
     # 3. Append to pacman.conf
     sudo bash -c 'cat <<EOF >> /etc/pacman.conf
 
