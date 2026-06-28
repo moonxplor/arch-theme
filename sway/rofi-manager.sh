@@ -45,12 +45,12 @@ elif [ "$TYPE" = "clipboard" ]; then
     fi
 
     set +e
-    SELECTION=$(echo "$COMBINED" | grep -v "^$" | rofi -dmenu -p "Clipboard" -display-columns 2 -kb-custom-1 "Alt+p" -kb-custom-2 "Alt+c" -theme-str 'element { children: [ element-text ]; } entry { placeholder: "Search... (Alt+P: Pin, Alt+C: Clear)"; }')
+    SELECTION=$(echo "$COMBINED" | grep -v "^$" | rofi -dmenu -p "Clipboard" -display-columns 2 -kb-custom-1 "Control+p" -kb-custom-2 "Control+c" -theme-str 'element { children: [ element-text ]; } entry { placeholder: "Search... (Ctrl+P: Pin, Ctrl+C: Clear)"; }')
     ROFI_EXIT=$?
     set -e
 
     if [ $ROFI_EXIT -eq 11 ]; then
-        # Alt+c pressed: Clear standard history
+        # Control+c pressed: Clear standard history
         cliphist wipe
         exec ~/.config/sway/rofi-manager.sh clipboard
     elif [ -n "$SELECTION" ]; then

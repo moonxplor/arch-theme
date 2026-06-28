@@ -17,13 +17,10 @@ if [ -f "$SWAY_CONFIG" ]; then
     # Change the main modifier to Mod1 (Alt)
     sed -i 's/set $mod Mod4/set $mod Mod1/g' "$SWAY_CONFIG"
     
-    # Change the clipboard shortcut to $mod+Shift+v so it doesn't conflict with normal Alt+V pasting
-    sed -i 's/bindsym $mod+v exec ~\/.config\/sway\/rofi-manager.sh clipboard/bindsym $mod+Shift+v exec ~\/.config\/sway\/rofi-manager.sh clipboard/g' "$SWAY_CONFIG"
-    
     # Remove the caps:super workaround if it was added previously
     sed -i '/xkb_options caps:super/d' "$SWAY_CONFIG"
     
-    log_success "Changed Sway modifier to Alt (Mod1) and remapped clipboard to Alt+Shift+V!"
+    log_success "Changed Sway modifier to Alt (Mod1)!"
 else
     log_info "Sway config not found at $SWAY_CONFIG. Assuming dotfiles are not fully installed yet."
 fi
