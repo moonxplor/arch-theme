@@ -223,15 +223,6 @@ if prompt_yn "Restore TLP Power Management Configuration?"; then
     fi
 fi
 
-if prompt_yn "Setup Fingerprint Authentication?"; then
-    log_info "Running fingerprint setup..."
-    if [ -f "$DOTFILES_DIR/fingerprint/setup.sh" ]; then
-        sudo bash "$DOTFILES_DIR/fingerprint/setup.sh"
-        log_success "Fingerprint setup completed!"
-    else
-        log_error "Fingerprint setup script not found!"
-    fi
-fi
 
 log_info "Setting up Lemurs display manager..."
 sudo mkdir -p /etc/lemurs
@@ -245,12 +236,12 @@ sudo cp "$DOTFILES_DIR/lemurs/pam" /etc/pam.d/lemurs
 sudo chmod 644 /etc/pam.d/lemurs
 
 # Disable old display managers
-for dm in ly greetd sddm gdm lightdm; do
+for dm in ly greetd sddm gdm lightdm plasmalogin; do
     sudo systemctl disable "$dm.service" 2>/dev/null || true
 done
 
 # Enable lemurs
-sudo systemctl enable lemurs.service
+sudo systemctl enable -f lemurs.service
 sudo systemctl daemon-reload
 log_success "System scripts and configs installed!"
 
