@@ -116,7 +116,8 @@ PACKAGES=(
     # Default Apps & Shell
     "zen-browser-bin" "zed" "neovim" "zathura" "zathura-pdf-mupdf" "imv" "mpv" "xarchiver" "vesktop" "snapshot" "zsh" "starship"
     # Theming & Fonts
-    "adw-gtk-theme" "ttf-ibm-plex" "ttf-firacode-nerd" "librsvg" "npm" "kvantum" "kvantum-qt5"
+    "adw-gtk-theme" "ttf-ibm-plex" "ttf-firacode-nerd" "ttf-joypixels" "librsvg" "npm" "kvantum" "kvantum-qt5"
+    "rofimoji"
 )
 yay -S --needed --noconfirm "${PACKAGES[@]}"
 log_success "Dependencies installed!"
