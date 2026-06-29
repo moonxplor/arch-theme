@@ -71,7 +71,7 @@ set $browser zen-browser
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 # Use swaybg explicitly instead of output * bg to bypass native renderer bugs
-exec_always killall swaybg; swaybg -i ~/Pictures/wallpapers/active_wallpaper.png -m fill
+exec_always sh -c 'killall swaybg; swaybg -i ~/Pictures/wallpapers/active_wallpaper.png -m fill'
 output 'AU Optronics 0x323D Unknown' resolution 1920x1080@60.050Hz position 0,0 scale 1.25
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputsqwfr
