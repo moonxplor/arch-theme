@@ -186,18 +186,22 @@ log_success "Configs successfully linked!"
 # --- 7. Install Wallpaper & Generate Bookmarks ---
 log_info "Installing wallpapers..."
 TARGET_WP="/home/moonxplor/Pictures/Wallpaper/IMG_2565.PNG"
-if [ -f "$TARGET_WP" ]; then
-    log_info "Generating theme wallpapers using $TARGET_WP..."
-    if ! command -v magick &> /dev/null; then
-        sudo pacman -S --needed --noconfirm imagemagick jq
-    fi
-    bash "$DOTFILES_DIR/scripts/apply_frosted_glass.sh" "$TARGET_WP" "$HOME/Pictures/wallpapers/active_wallpaper.png"
+if [ -f "$HOME/Pictures/wallpapers/active_wallpaper.png" ]; then
+    log_success "Wallpapers already installed."
 else
-    log_warn "Target wallpaper $TARGET_WP not found. Falling back to default."
-    cp "$DOTFILES_DIR/wallpapers/satisfaction_waybar_blur.png" "$HOME/Pictures/wallpapers/active_wallpaper.png"
-    cp "$DOTFILES_DIR/wallpapers/satisfaction_waybar_blur_lock.png" "$HOME/Pictures/wallpapers/active_wallpaper_lock.png"
+    if [ -f "$TARGET_WP" ]; then
+        log_info "Generating theme wallpapers using $TARGET_WP..."
+        if ! command -v magick &> /dev/null; then
+            sudo pacman -S --needed --noconfirm imagemagick jq
+        fi
+        bash "$DOTFILES_DIR/scripts/apply_frosted_glass.sh" "$TARGET_WP" "$HOME/Pictures/wallpapers/active_wallpaper.png"
+    else
+        log_warn "Target wallpaper $TARGET_WP not found. Falling back to default."
+        cp "$DOTFILES_DIR/wallpapers/satisfaction_waybar_blur.png" "$HOME/Pictures/wallpapers/active_wallpaper.png"
+        cp "$DOTFILES_DIR/wallpapers/satisfaction_waybar_blur_lock.png" "$HOME/Pictures/wallpapers/active_wallpaper_lock.png"
+    fi
+    log_success "Wallpapers installed!"
 fi
-log_success "Wallpapers installed!"
 
 log_info "Generating file manager bookmarks..."
 cat << EOF > "$DOTFILES_DIR/gtk-3.0/bookmarks"
@@ -215,12 +219,16 @@ backup_and_symlink "$DOTFILES_DIR/icons/YAMIS-enlarged" "$HOME/.local/share/icon
 gtk-update-icon-cache -f -t "$HOME/.local/share/icons/YAMIS-enlarged" || true
 log_success "Custom icons linked!"
 
-if prompt_yn "Restore TLP Power Management Configuration?"; then
-    log_info "Restoring TLP power management system config..."
-    if [ -f "$DOTFILES_DIR/etc/tlp.conf" ]; then
-        sudo cp "$DOTFILES_DIR/etc/tlp.conf" "/etc/tlp.conf"
-        sudo chmod 644 "/etc/tlp.conf"
-        log_success "TLP restored!"
+if [ -f "$DOTFILES_DIR/etc/tlp.conf" ]; then
+    if diff -q "/etc/tlp.conf" "$DOTFILES_DIR/etc/tlp.conf" &>/dev/null; then
+        log_info "TLP power management configuration is already up to date."
+    else
+        if prompt_yn "Restore TLP Power Management Configuration?"; then
+            log_info "Restoring TLP power management system config..."
+            sudo cp "$DOTFILES_DIR/etc/tlp.conf" "/etc/tlp.conf"
+            sudo chmod 644 "/etc/tlp.conf"
+            log_success "TLP restored!"
+        fi
     fi
 fi
 
@@ -241,9 +249,14 @@ for dm in ly greetd sddm gdm lightdm plasmalogin; do
     sudo systemctl disable "$dm.service" 2>/dev/null || true
 done
 
-# Enable lemurs
-sudo systemctl enable -f lemurs.service
-sudo systemctl daemon-reload
+# Enable lemurs if not already enabled
+if ! systemctl is-enabled --quiet lemurs.service 2>/dev/null; then
+    sudo systemctl enable -f lemurs.service
+    sudo systemctl daemon-reload
+    log_success "Lemurs display manager enabled!"
+else
+    log_info "Lemurs display manager is already enabled."
+fi
 log_success "System scripts and configs installed!"
 
 # --- 10. Systemd Services ---
