@@ -186,6 +186,15 @@ backup_and_symlink "$DOTFILES_DIR/zshrc" "$HOME/.zshrc"
 backup_and_symlink "$DOTFILES_DIR/mimeapps.list" "$HOME/.config/mimeapps.list"
 log_success "Configs successfully linked!"
 
+# --- Set Zsh as default shell ---
+if [ "$SHELL" != "$(which zsh)" ]; then
+    log_info "Setting Zsh as your default shell..."
+    chsh -s "$(which zsh)" || log_warn "Could not change shell automatically. Run 'chsh -s \$(which zsh)' manually."
+    log_success "Default shell set to Zsh!"
+else
+    log_info "Zsh is already the default shell."
+fi
+
 # --- 7. Install Wallpaper & Generate Bookmarks ---
 log_info "Installing wallpapers..."
 TARGET_WP="/home/moonxplor/Pictures/Wallpaper/IMG_2565.PNG"
