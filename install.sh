@@ -109,15 +109,18 @@ PACKAGES=(
     "swayfx" "swaybg" "waybar" "rofi-wayland" "kitty" "thunar"
     # Display Manager
     "lemurs"
+    # Audio Stack
+    "pipewire" "wireplumber" "pipewire-pulse" "libpulse" "pavucontrol"
     # System/UX Utilities
-    "swayidle" "swaylock" "brightnessctl" "swaync" "wlogout" "polkit-kde-agent" "network-manager-applet" "sway-audio-idle-inhibit-git" "xdg-desktop-portal" "xdg-desktop-portal-wlr" "jq" "autotiling" "grim" "slurp" "swappy"
-    # Clipboard
-    "wl-clipboard" "cliphist"
+    "swayidle" "swaylock" "brightnessctl" "swaync" "wlogout" "polkit-kde-agent" "network-manager-applet" "sway-audio-idle-inhibit-git" "xdg-desktop-portal" "xdg-desktop-portal-wlr" "jq" "autotiling" "grim" "slurp" "swappy" "playerctl" "imagemagick"
+    # Clipboard & Emoji
+    "wl-clipboard" "cliphist" "rofimoji"
+    # Power & Auth
+    "tlp" "gnome-keyring"
     # Default Apps & Shell
     "zen-browser-bin" "zed" "neovim" "zathura" "zathura-pdf-mupdf" "imv" "mpv" "xarchiver" "vesktop" "snapshot" "zsh" "starship"
     # Theming & Fonts
     "adw-gtk-theme" "ttf-ibm-plex" "ttf-firacode-nerd" "ttf-joypixels" "librsvg" "npm" "kvantum" "kvantum-qt5"
-    "rofimoji"
 )
 yay -S --needed --noconfirm "${PACKAGES[@]}"
 log_success "Dependencies installed!"
