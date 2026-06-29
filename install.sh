@@ -110,11 +110,11 @@ PACKAGES=(
     # Display Manager
     "lemurs"
     # System/UX Utilities
-    "swayidle" "swaylock" "brightnessctl" "swaync" "wlogout" "polkit-kde-agent" "network-manager-applet" "sway-audio-idle-inhibit-git" "xdg-desktop-portal" "xdg-desktop-portal-wlr" "jq" "autotiling"
+    "swayidle" "swaylock" "brightnessctl" "swaync" "wlogout" "polkit-kde-agent" "network-manager-applet" "sway-audio-idle-inhibit-git" "xdg-desktop-portal" "xdg-desktop-portal-wlr" "jq" "autotiling" "grim" "slurp" "swappy"
     # Clipboard
     "wl-clipboard" "cliphist"
-    # Default Apps
-    "zen-browser-bin" "zed" "neovim" "zathura" "zathura-pdf-mupdf" "imv" "mpv" "xarchiver" "vesktop" "snapshot"
+    # Default Apps & Shell
+    "zen-browser-bin" "zed" "neovim" "zathura" "zathura-pdf-mupdf" "imv" "mpv" "xarchiver" "vesktop" "snapshot" "zsh" "starship"
     # Theming & Fonts
     "adw-gtk-theme" "ttf-ibm-plex" "ttf-firacode-nerd" "librsvg" "npm" "kvantum" "kvantum-qt5"
 )
@@ -164,7 +164,7 @@ backup_and_symlink() {
 }
 
 # Config directories
-for config in sway swaylock waybar kitty rofi swaync wlogout btop environment.d qt5ct qt6ct tlpui gtk-3.0 gtk-4.0 fontconfig Thunar xfce4 Kvantum; do
+for config in sway swaylock waybar kitty rofi swaync wlogout btop environment.d qt5ct qt6ct tlpui gtk-3.0 gtk-4.0 fontconfig Thunar xfce4 Kvantum swappy; do
     backup_and_symlink "$DOTFILES_DIR/$config" "$HOME/.config/$config"
 done
 
