@@ -28,6 +28,7 @@ format = "[$symbol]($style)"
 
 [os.symbols]
 Arch = "󰣇 "
+EndeavourOS = "󰣇 "
 
 [username]
 show_always = true

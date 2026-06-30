@@ -108,7 +108,7 @@ PACKAGES=(
     # Core Environment
     "swayfx" "swaybg" "waybar" "rofi-wayland" "kitty" "thunar"
     # Display Manager
-    "lemurs"
+    "ly"
     # Audio Stack
     "pipewire" "wireplumber" "pipewire-pulse" "libpulse" "pavucontrol"
     # System/UX Utilities
@@ -244,30 +244,19 @@ if [ -f "$DOTFILES_DIR/etc/tlp.conf" ]; then
     fi
 fi
 
-
-log_info "Setting up Lemurs display manager..."
-sudo mkdir -p /etc/lemurs
-sudo mkdir -p /etc/lemurs/wayland
-
-# Config (symlink so repo changes apply instantly)
-sudo ln -sf "$DOTFILES_DIR/lemurs/config.toml" /etc/lemurs/config.toml
-
-# PAM config (copy — symlinks in /etc/pam.d can cause issues)
-sudo cp "$DOTFILES_DIR/lemurs/pam" /etc/pam.d/lemurs
-sudo chmod 644 /etc/pam.d/lemurs
+log_info "Setting up Ly display manager..."
 
 # Disable old display managers
-for dm in ly greetd sddm gdm lightdm plasmalogin; do
+for dm in ly greetd sddm gdm lightdm plasmalogin lemurs; do
     sudo systemctl disable "$dm.service" 2>/dev/null || true
 done
 
-# Enable lemurs if not already enabled
-if ! systemctl is-enabled --quiet lemurs.service 2>/dev/null; then
-    sudo systemctl enable -f lemurs.service
-    sudo systemctl daemon-reload
-    log_success "Lemurs display manager enabled!"
+# Enable ly if not already enabled
+if ! systemctl is-enabled --quiet ly.service 2>/dev/null; then
+    sudo systemctl enable -f ly.service
+    log_success "Ly display manager enabled!"
 else
-    log_info "Lemurs display manager is already enabled."
+    log_info "Ly display manager is already enabled."
 fi
 log_success "System scripts and configs installed!"
 
