@@ -252,8 +252,8 @@ for dm in ly greetd sddm gdm lightdm plasmalogin lemurs; do
 done
 
 # Enable ly if not already enabled
-if ! systemctl is-enabled --quiet ly.service 2>/dev/null; then
-    sudo systemctl enable -f ly.service
+if ! systemctl is-enabled --quiet ly@tty2.service 2>/dev/null; then
+    sudo systemctl enable -f ly@tty2.service
     log_success "Ly display manager enabled!"
 else
     log_info "Ly display manager is already enabled."
