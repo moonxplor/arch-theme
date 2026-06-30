@@ -1,0 +1,56 @@
+#!/bin/bash
+
+# Must run as root
+if [ "$EUID" -ne 0 ]; then
+  echo "Please run with sudo (e.g. sudo togglekb)"
+  exit 1
+fi
+
+SERVICE_FILE="/etc/systemd/system/disable-internal-keyboard.service"
+
+if systemctl is-enabled --quiet disable-internal-keyboard.service 2>/dev/null; then
+    echo "Enabling internal keyboard..."
+    
+    # Disable and stop the service
+    systemctl disable disable-internal-keyboard.service
+    rm -f "$SERVICE_FILE"
+    systemctl daemon-reload
+    
+    # Instantly bind the keyboard back
+    for dev in /sys/bus/serio/devices/serio*; do
+        if [ -e "$dev/drvctl" ]; then
+            echo -n "rescan" > "$dev/drvctl"
+        fi
+    done
+    modprobe atkbd
+    echo "Internal keyboard is now ENABLED. It will remain enabled across reboots."
+else
+    echo "Disabling internal keyboard..."
+    
+    # Create the systemd service to disable it on boot
+    cat << 'INNER_EOF' > "$SERVICE_FILE"
+[Unit]
+Description=Disable Internal AT Keyboard
+DefaultDependencies=no
+Before=sysinit.target
+
+[Service]
+Type=oneshot
+ExecStart=/bin/sh -c 'for dev in /sys/bus/serio/drivers/atkbd/serio*; do [ -e "$$dev" ] && echo -n "$${dev##*/}" > /sys/bus/serio/drivers/atkbd/unbind; done'
+RemainAfterExit=yes
+
+[Install]
+WantedBy=sysinit.target
+INNER_EOF
+    
+    systemctl daemon-reload
+    systemctl enable --now disable-internal-keyboard.service
+    
+    # Instantly unbind it now just in case the service missed it
+    for dev in /sys/bus/serio/drivers/atkbd/serio*; do 
+        if [ -e "$dev" ]; then
+            echo -n "$(basename "$dev")" > /sys/bus/serio/drivers/atkbd/unbind
+        fi
+    done
+    echo "Internal keyboard is now DISABLED permanently."
+fi

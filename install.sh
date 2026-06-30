@@ -258,6 +258,10 @@ if ! systemctl is-enabled --quiet ly.service 2>/dev/null; then
 else
     log_info "Ly display manager is already enabled."
 fi
+
+# Install global utility scripts
+log_info "Installing global system utilities..."
+sudo ln -sf "$DOTFILES_DIR/scripts/togglekb" /usr/local/bin/togglekb
 log_success "System scripts and configs installed!"
 
 # --- 10. Systemd Services ---
