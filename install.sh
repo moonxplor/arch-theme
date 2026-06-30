@@ -118,7 +118,7 @@ PACKAGES=(
     # Power & Auth
     "tlp" "gnome-keyring"
     # Default Apps & Shell
-    "zen-browser-bin" "zed" "neovim" "zathura" "zathura-pdf-mupdf" "imv" "mpv" "xarchiver" "vesktop" "snapshot" "zsh" "starship"
+    "zen-browser-bin" "zed" "neovim" "zathura" "zathura-pdf-mupdf" "imv" "mpv" "xarchiver" "vesktop" "snapshot" "zsh" "starship" "zoxide" "eza" "bat" "fzf"
     # Theming & Fonts
     "adw-gtk-theme" "ttf-ibm-plex" "ttf-firacode-nerd" "ttf-joypixels" "librsvg" "npm" "kvantum" "kvantum-qt5"
 )
