@@ -30,7 +30,6 @@ exec_always {
 # Remove titlebars (top text) and use a clean 2-pixel border instead
 default_border pixel 2px
 default_floating_border pixel 2px
-corner_radius 10
 
 # class                 border  bground text    indicator child_border
 client.focused          #bb9af7 #bb9af7 #1a1b26 #bb9af7   #bb9af7
@@ -40,11 +39,11 @@ client.urgent           #f7768e #f7768e #c0caf5 #bb9af7   #f7768e
 client.placeholder      #bb9af7 #bb9af7 #1a1b26 #bb9af7   #bb9af7
 
 # SwayFX Enhancements (Vibrancy, Blur, and Depth)
-blur disable
-blur_radius 7
-blur_passes 4
-shadows disable
-shadow_blur_radius 20
+# --- SwayFX Settings (Disabled for Intel Haswell Compatibility) ---
+# blur enable
+# blur_passes 3
+# shadows enable
+# corner_radius 820
 shadow_color #15161ecc
 for_window [tiling] dim_inactive 0.15
 for_window [floating] dim_inactive 0.15
