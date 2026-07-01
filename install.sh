@@ -113,6 +113,8 @@ PACKAGES=(
     "pipewire" "wireplumber" "pipewire-pulse" "libpulse" "pavucontrol"
     # System/UX Utilities
     "swayidle" "swaylock" "brightnessctl" "swaync" "wlogout" "polkit-kde-agent" "network-manager-applet" "sway-audio-idle-inhibit-git" "xdg-desktop-portal" "xdg-desktop-portal-wlr" "jq" "autotiling" "grim" "slurp" "swappy" "playerctl" "imagemagick"
+    # Showcase & Terminal Tools
+    "wf-recorder" "pipes.sh" "fastfetch"
     # Clipboard & Emoji
     "wl-clipboard" "cliphist" "rofimoji"
     # Power & Auth
@@ -168,7 +170,7 @@ backup_and_symlink() {
 }
 
 # Config directories
-for config in sway swaylock waybar kitty rofi swaync wlogout btop environment.d qt5ct qt6ct tlpui gtk-3.0 gtk-4.0 fontconfig Thunar xfce4 Kvantum swappy; do
+for config in sway swaylock waybar kitty rofi swaync wlogout btop environment.d qt5ct qt6ct tlpui gtk-3.0 gtk-4.0 fontconfig Thunar xfce4 Kvantum swappy fastfetch; do
     backup_and_symlink "$DOTFILES_DIR/$config" "$HOME/.config/$config"
 done
 

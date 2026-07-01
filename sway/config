@@ -285,6 +285,9 @@ bindsym $mod+r mode "resize"
     # Press Super+PrintScreen to instantly copy your entire screen to the clipboard
     bindsym $mod+Print exec grim - | wl-copy
 
+    # Screen Recording (Start/Stop wf-recorder)
+    bindsym $mod+Shift+r exec ~/.config/sway/toggle_recorder.sh
+
 #
 # Status Bar:
 #
