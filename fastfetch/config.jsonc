@@ -14,10 +14,19 @@
     "shell",
     "wm",
     "terminal",
-    "cpu",
-    "gpu",
+    {
+      "type": "cpu",
+      "format": "{name} @ {freq-max}"
+    },
+    {
+      "type": "gpu",
+      "format": "{name} [{type}]"
+    },
     "memory",
-    "disk",
+    {
+      "type": "disk",
+      "format": "{size-used} / {size-total} ({size-percentage})"
+    },
     "break",
     "colors"
   ]
