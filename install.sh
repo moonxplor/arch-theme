@@ -116,7 +116,7 @@ PACKAGES=(
     # Showcase & Terminal Tools
     "wf-recorder" "pipes.sh" "fastfetch" "ddgr"
     # Clipboard & Emoji
-    "wl-clipboard" "cliphist" "rofimoji"
+    "wl-clipboard" "clipse" "rofimoji"
     # Power & Auth
     "tlp" "gnome-keyring"
     # Default Apps & Shell
