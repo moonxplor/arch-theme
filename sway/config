@@ -204,8 +204,8 @@ exec_always ~/.config/sway/idle.sh
     bindsym $mod+b exec $browser
     bindsym $mod+z exec zeditor
     bindsym $mod+Shift+z exec zeditor -n
-    # Cliphist: Launch clipboard manager (Replaced splitv)
-    bindsym $mod+v exec ~/.config/sway/rofi-manager.sh clipboard
+    # Clipboard Manager
+    bindsym $mod+v exec ~/.config/sway/clipse-toggle.sh
 
     # Switch the current container between different layout styles
     bindsym $mod+s layout stacking
@@ -320,9 +320,8 @@ exec nm-applet --indicator
 # Polkit Authentication Agent (Required for GUI root password prompts)
 exec /usr/lib/polkit-kde-authentication-agent-1
 
-# Clipboard Manager Daemon
-exec wl-paste --type text --watch cliphist store
-exec wl-paste --type image --watch cliphist store
+# Clipse Clipboard Manager
+exec clipse -listen
 
 # Emoji Picker
 
@@ -348,3 +347,4 @@ for_window [app_id="swappy"] floating enable
 
 # Volume Mixer Popup (Pavucontrol)
 for_window [app_id="org.pulseaudio.pavucontrol"] floating enable, resize set width 450 px height 265 px, move position 875 0
+for_window [app_id="clipse"] floating enable, resize set width 800 px height 600 px, move position center

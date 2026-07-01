@@ -9,7 +9,7 @@
     "spacing": 4,
     "modules-left": ["sway/workspaces", "sway/mode", "sway/window"],
     "modules-center": ["clock"],
-    "modules-right": ["custom/recorder", "custom/capslock", "custom/autosleep", "tray", "custom/swaync", "group/hardware", "custom/power"],
+    "modules-right": ["custom/recorder", "custom/clipse", "custom/capslock", "custom/autosleep", "tray", "custom/swaync", "group/hardware", "custom/power"],
 
     "group/hardware": {
         "orientation": "horizontal",
@@ -38,6 +38,13 @@
         "return-type": "json",
         "interval": 10,
         "format": "<span color='#bb9af7'>{alt}</span> {text}"
+    },
+    "custom/clipse": {
+        "exec": "echo '{\"text\": \"󰅌\"}'",
+        "return-type": "json",
+        "interval": "once",
+        "format": "<span color='#bb9af7'> {text} </span>",
+        "on-click": "~/.config/sway/clipse-toggle.sh"
     },
     "network": {
         "format-wifi": "<span color='#7dcfff'>󰤨</span>   {essid}",
