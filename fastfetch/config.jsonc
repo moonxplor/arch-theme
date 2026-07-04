@@ -9,77 +9,84 @@
     "separator",
     {
       "type": "os",
-      "key": ""
+      "key": " "
     },
     {
       "type": "custom",
-      "key": "󰌢",
+      "key": "󰌢 ",
       "format": "Inspiron 3542"
     },
     {
       "type": "kernel",
-      "key": ""
+      "key": " "
     },
     {
       "type": "uptime",
-      "key": "󰔚"
+      "key": "󰔚 "
     },
     {
       "type": "packages",
-      "key": "󰏖"
+      "key": "󰏖 "
     },
     {
       "type": "shell",
-      "key": ""
+      "key": " "
     },
     {
       "type": "custom",
-      "key": "󰍹",
+      "key": "󰍹 ",
       "format": "1366x768 @ 60Hz"
     },
     {
       "type": "wm",
-      "key": ""
+      "key": " "
     },
     {
       "type": "theme",
-      "key": "󰏘"
+      "key": "󰏘 "
     },
     {
       "type": "icons",
-      "key": "󰀻"
+      "key": "󰀻 "
     },
     {
       "type": "font",
-      "key": ""
+      "key": " "
     },
     {
       "type": "cursor",
-      "key": "󰇀"
+      "key": "󰇀 "
     },
     {
       "type": "custom",
-      "key": "",
+      "key": " ",
       "format": "Kitty"
     },
     {
       "type": "custom",
-      "key": "",
+      "key": " ",
       "format": "Pentium 3558U"
     },
     {
       "type": "custom",
-      "key": "󰢮",
+      "key": "󰢮 ",
       "format": "Intel HD Graphics"
     },
     {
       "type": "memory",
-      "key": "󰍛",
+      "key": "󰍛 ",
       "format": "{used} ({percentage}%)"
     },
     {
       "type": "disk",
-      "key": "󰋊",
+      "folders": "/",
+      "key": "󰋊 ",
+      "format": "{size-used} ({size-percentage})"
+    },
+    {
+      "type": "disk",
+      "folders": "/home",
+      "key": "󰋜 ",
       "format": "{size-used} ({size-percentage})"
     },
     "break",
