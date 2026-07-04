@@ -315,7 +315,7 @@ exec_always autotiling
 exec nm-applet --indicator
 
 # Polkit Authentication Agent (Required for GUI root password prompts)
-exec /usr/lib/polkit-kde-authentication-agent-1
+exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
 # Clipse Clipboard Manager
 exec clipse -listen
