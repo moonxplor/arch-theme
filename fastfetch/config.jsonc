@@ -7,47 +7,85 @@
   "modules": [
     "title",
     "separator",
-    "os",
+    {
+      "type": "os",
+      "key": ""
+    },
     {
       "type": "custom",
-      "key": "Host",
+      "key": "󰌢",
       "format": "Inspiron 3542"
     },
-    "kernel",
-    "uptime",
-    "packages",
-    "shell",
+    {
+      "type": "kernel",
+      "key": ""
+    },
+    {
+      "type": "uptime",
+      "key": "󰔚"
+    },
+    {
+      "type": "packages",
+      "key": "󰏖"
+    },
+    {
+      "type": "shell",
+      "key": ""
+    },
     {
       "type": "custom",
-      "key": "Display",
+      "key": "󰍹",
       "format": "1366x768 @ 60Hz"
     },
-    "wm",
-    "theme",
-    "icons",
-    "font",
-    "cursor",
+    {
+      "type": "wm",
+      "key": ""
+    },
+    {
+      "type": "theme",
+      "key": "󰏘"
+    },
+    {
+      "type": "icons",
+      "key": "󰀻"
+    },
+    {
+      "type": "font",
+      "key": ""
+    },
+    {
+      "type": "cursor",
+      "key": "󰇀"
+    },
     {
       "type": "custom",
-      "key": "Terminal",
+      "key": "",
       "format": "Kitty"
     },
     {
       "type": "custom",
-      "key": "CPU",
+      "key": "",
       "format": "Pentium 3558U"
     },
     {
       "type": "custom",
-      "key": "GPU",
+      "key": "󰢮",
       "format": "Intel HD Graphics"
     },
-    "memory",
+    {
+      "type": "memory",
+      "key": "󰍛",
+      "format": "{used} ({percentage}%)"
+    },
     {
       "type": "disk",
-      "format": "{size-used} / {size-total} ({size-percentage})"
+      "key": "󰋊",
+      "format": "{size-used} ({size-percentage})"
     },
     "break",
-    "colors"
+    {
+      "type": "colors",
+      "symbol": "circle"
+    }
   ]
 }
