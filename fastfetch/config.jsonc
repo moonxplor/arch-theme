@@ -8,33 +8,45 @@
     "title",
     "separator",
     "os",
-    "host",
+    {
+      "type": "custom",
+      "key": "Host",
+      "format": "Inspiron 3542"
+    },
     "kernel",
     "uptime",
     "packages",
     "shell",
-    "display",
+    {
+      "type": "custom",
+      "key": "Display",
+      "format": "1366x768 @ 60Hz"
+    },
     "wm",
     "theme",
     "icons",
     "font",
     "cursor",
-    "terminal",
     {
-      "type": "cpu",
-      "format": "{name}"
+      "type": "custom",
+      "key": "Terminal",
+      "format": "Kitty"
     },
     {
-      "type": "gpu",
-      "format": "{name}"
+      "type": "custom",
+      "key": "CPU",
+      "format": "Pentium 3558U"
+    },
+    {
+      "type": "custom",
+      "key": "GPU",
+      "format": "Intel HD Graphics"
     },
     "memory",
     {
       "type": "disk",
       "format": "{size-used} / {size-total} ({size-percentage})"
     },
-    "battery",
-    "localip",
     "break",
     "colors"
   ]
