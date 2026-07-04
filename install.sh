@@ -218,7 +218,8 @@ else
 fi
 
 log_info "Generating file manager bookmarks..."
-cat << EOF > "$DOTFILES_DIR/gtk-3.0/bookmarks"
+mkdir -p "$HOME/.config/gtk-3.0"
+cat << EOF > "$HOME/.config/gtk-3.0/bookmarks"
 file://$HOME/Pictures
 file://$HOME/code
 file://$HOME/Music
