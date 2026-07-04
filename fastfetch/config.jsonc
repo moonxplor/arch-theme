@@ -8,25 +8,33 @@
     "title",
     "separator",
     "os",
+    "host",
     "kernel",
     "uptime",
     "packages",
     "shell",
+    "display",
     "wm",
+    "theme",
+    "icons",
+    "font",
+    "cursor",
     "terminal",
     {
       "type": "cpu",
-      "format": "{name} @ {freq-max}"
+      "format": "{name}"
     },
     {
       "type": "gpu",
-      "format": "{name} [{type}]"
+      "format": "{name}"
     },
     "memory",
     {
       "type": "disk",
       "format": "{size-used} / {size-total} ({size-percentage})"
     },
+    "battery",
+    "localip",
     "break",
     "colors"
   ]
