@@ -277,8 +277,6 @@ bindsym $mod+r mode "resize"
     # Special keys to adjust brightness via brightnessctl
     bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
     bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
-    # Fix for brightness resetting on boot: forcefully re-apply systemd's saved state when Sway starts
-    exec sh -c 'val=$(cat /var/lib/systemd/backlight/* 2>/dev/null | head -n 1); if [ -n "$val" ]; then brightnessctl set "$val" -q; fi'
 
     # Special key to take a screenshot with grim
     # Press Super+Shift+s to drag and select a region, instantly copying it to your clipboard
