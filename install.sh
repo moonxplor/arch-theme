@@ -112,7 +112,7 @@ PACKAGES=(
     # Audio Stack
     "pipewire" "wireplumber" "pipewire-pulse" "libpulse" "pavucontrol"
     # System/UX Utilities
-    "swayidle" "swaylock" "brightnessctl" "swaync" "wlogout" "polkit-kde-agent" "network-manager-applet" "sway-audio-idle-inhibit-git" "xdg-desktop-portal" "xdg-desktop-portal-wlr" "jq" "autotiling" "grim" "slurp" "swappy" "playerctl" "imagemagick"
+    "swayidle" "swaylock" "brightnessctl" "swaync" "wlogout" "polkit-gnome" "network-manager-applet" "sway-audio-idle-inhibit-git" "xdg-desktop-portal" "xdg-desktop-portal-wlr" "jq" "autotiling" "grim" "slurp" "swappy" "playerctl" "imagemagick"
     # Showcase & Terminal Tools
     "wf-recorder" "pipes.sh" "fastfetch" "ddgr"
     # Clipboard & Emoji
