@@ -72,6 +72,7 @@ set $browser zen-browser
 # Use swaybg explicitly instead of output * bg to bypass native renderer bugs
 exec_always sh -c 'killall swaybg; swaybg -i ~/Pictures/wallpapers/active_wallpaper.png -m fill'
 # Dell Inspiron 3542 Display Settings (1366x768)
+output eDP-1 resolution 1366x768 position 0,0 scale 1
 # Fallback for any other display
 output * scale 1
 #
