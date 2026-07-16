@@ -265,6 +265,11 @@ fi
 # Install global utility scripts
 log_info "Installing global system utilities..."
 sudo ln -sf "$DOTFILES_DIR/scripts/togglekb" /usr/local/bin/togglekb
+
+# Fix swaylock PAM to remove faillock delay
+sudo cp "$DOTFILES_DIR/swaylock/pam" /etc/pam.d/swaylock
+sudo chmod 644 /etc/pam.d/swaylock
+
 log_success "System scripts and configs installed!"
 
 # --- 10. Systemd Services ---
