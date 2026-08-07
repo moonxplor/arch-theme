@@ -311,6 +311,9 @@ The login PAM stack requires a password on every login and automatically unlocks
 ```
 auth       include      system-local-login
 auth       optional     pam_gnome_keyring.so       ← Unlocks keyring with login password
+account    include      system-local-login
+password   include      system-local-login
+session    include      system-local-login
 session    optional     pam_gnome_keyring.so auto_start
 ```
 
