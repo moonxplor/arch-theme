@@ -248,19 +248,31 @@ if [ -f "$DOTFILES_DIR/etc/tlp.conf" ]; then
 fi
 
 log_info "Setting up Ly display manager..."
+sudo mkdir -p /etc/ly
+
+# Config (symlink so repo changes apply instantly)
+sudo ln -sf "$DOTFILES_DIR/ly/config.ini" /etc/ly/config.ini
+
+# PAM config (copy — symlinks in /etc/pam.d can cause issues)
+sudo cp "$DOTFILES_DIR/ly/pam" /etc/pam.d/ly
+sudo chmod 644 /etc/pam.d/ly
+
+# TTY color theme script and systemd service
+sudo cp "$DOTFILES_DIR/ly/set-tty-theme.sh" /etc/ly/set-tty-theme.sh
+sudo chmod +x /etc/ly/set-tty-theme.sh
+sudo cp "$DOTFILES_DIR/ly/tty-theme.service" /etc/systemd/system/tty-theme.service
+sudo chmod 644 /etc/systemd/system/tty-theme.service
 
 # Disable old display managers
 for dm in ly greetd sddm gdm lightdm plasmalogin lemurs; do
     sudo systemctl disable "$dm.service" 2>/dev/null || true
 done
 
-# Enable ly if not already enabled
-if ! systemctl is-enabled --quiet ly@tty2.service 2>/dev/null; then
-    sudo systemctl enable -f ly@tty2.service
-    log_success "Ly display manager enabled!"
-else
-    log_info "Ly display manager is already enabled."
-fi
+# Enable ly and tty-theme
+sudo systemctl enable -f ly.service
+sudo systemctl enable tty-theme.service
+sudo systemctl daemon-reload
+log_success "Ly display manager and TTY colors enabled!"
 
 # Install global utility scripts
 log_info "Installing global system utilities..."
@@ -280,6 +292,6 @@ systemctl --user enable --now sway-hw-notify.service
 log_success "Systemd services enabled!"
 
 log_success "Installation Complete!"
-log_info "NOTE: After reboot, you will be greeted by the Lemurs display manager."
-log_info "Use the left/right arrow keys to select 'sway' (SwayFX) before entering your password."
+log_info "NOTE: After reboot, you will be greeted by the themed Ly display manager."
+log_info "Select 'sway' and enter your password to login."
 log_info "Reboot or log out to enjoy your pristine Sway setup!"
