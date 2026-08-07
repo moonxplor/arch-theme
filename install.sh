@@ -263,13 +263,14 @@ sudo chmod +x /etc/ly/set-tty-theme.sh
 sudo cp "$DOTFILES_DIR/ly/tty-theme.service" /etc/systemd/system/tty-theme.service
 sudo chmod 644 /etc/systemd/system/tty-theme.service
 
-# Disable old display managers
+# Disable old display managers and getty on tty2
 for dm in ly greetd sddm gdm lightdm plasmalogin lemurs; do
     sudo systemctl disable "$dm.service" 2>/dev/null || true
 done
+sudo systemctl disable getty@tty2.service 2>/dev/null || true
 
-# Enable ly and tty-theme
-sudo systemctl enable -f ly.service
+# Enable ly@tty2 and tty-theme
+sudo systemctl enable -f ly@tty2.service
 sudo systemctl enable tty-theme.service
 sudo systemctl daemon-reload
 log_success "Ly display manager and TTY colors enabled!"
