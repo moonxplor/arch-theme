@@ -72,12 +72,13 @@ window#waybar {
 #network:hover,
 #tray:hover,
 #custom-recorder:hover,
+#custom-clipse:hover,
 #custom-capslock:hover,
 #custom-autosleep:hover,
 #custom-swaync:hover,
 #bluetooth:hover,
 #custom-power:hover {
-    border: 2px solid #9d7cd8;
+    border: 2px solid #33e0e0;
 }
 
 #workspaces button {

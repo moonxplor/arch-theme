@@ -36,14 +36,7 @@
         "exec": "~/.config/waybar/battery.sh",
         "on-click": "~/.config/waybar/tlp_menu.sh",
         "return-type": "json",
-        "format": "<span color='#bb9af7'>{alt}</span> {text}"
-    },
-    "custom/clipse": {
-        "exec": "echo '{\"text\": \"󰅌\", \"tooltip\": \"Clipboard Manager\"}'",
-        "return-type": "json",
-        "interval": "once",
-        "format": "<span color='#bb9af7'> {text} </span>",
-        "on-click": "~/.config/sway/clipse-toggle.sh"
+        "format": "<span color='#39c5bb'>{alt}</span> {text}"
     },
     "network": {
         "format-wifi": "<span color='#7dcfff'>󰤨</span>   {essid}",
@@ -138,5 +131,12 @@
         "exec": "~/.config/waybar/capslock.sh",
         "return-type": "json",
         "format": "{text}"
+    },
+    "custom/clipse": {
+        "exec": "echo '{\"text\": \"󰅌\", \"tooltip\": \"Clipboard Manager\"}'",
+        "return-type": "json",
+        "interval": "once",
+        "format": "<span color='#bb9af7'> {text} </span>",
+        "on-click": "~/.config/sway/clipse-toggle.sh"
     }
 }
