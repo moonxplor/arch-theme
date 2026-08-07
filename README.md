@@ -745,5 +745,5 @@ Edit `ly/config.ini` and `ly/set-tty-theme.sh`. The PAM file at `ly/pam` control
 ---
 
 <p align="center">
-  <sub>Built with 💙 on Arch Linux · Maintained by <a href="https://github.com/sea-deep">@sea-deep</a></sub>
+  <sub>Built with 💙 on Arch Linux · Maintained by <a href="https://github.com/sea-deep">@sea-deep</a> and <a href="https://github.com/moonxplor">@moonxplor</a></sub>
 </p>
