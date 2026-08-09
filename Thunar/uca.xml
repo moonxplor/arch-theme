@@ -23,4 +23,17 @@
         <patterns>*</patterns>
         <directories/>
 </action>
+<action>
+        <icon>com.visualstudio.code</icon>
+        <name>Open with VSCode</name>
+        <submenu></submenu>
+        <unique-id>1766393036319642-3</unique-id>
+        <command>code %F</command>
+        <description>Open selected files or folders in VSCode</description>
+        <range></range>
+        <patterns>*</patterns>
+        <directories/>
+        <text-files/>
+        <other-files/>
+</action>
 </actions>
