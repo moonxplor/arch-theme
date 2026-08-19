@@ -106,7 +106,7 @@ fi
 log_info "Installing dependencies..."
 PACKAGES=(
     # Core Environment
-    "swayfx" "swaybg" "waybar" "rofi-wayland" "kitty" "thunar"
+    "swayfx" "swaybg" "waybar" "rofi-wayland" "kitty" "thunar" "gvfs" "thunar-volman"
     # Display Manager
     "ly"
     # Audio Stack
