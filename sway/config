@@ -57,14 +57,10 @@ set $up k
 set $right l
 # Your preferred terminal emulator
 set $term kitty
-# Your preferred application launcher
-set $menu ~/.config/sway/rofi-manager.sh drun
 
 set $file_explorer thunar
 # Your preferred web browser
 set $browser zen-browser
-
-
 
 ### Output configuration
 #
@@ -81,8 +77,6 @@ output * scale 1
 gaps inner 2px
 gaps outer 1px
 
-
-
 ### Idle configuration
 #
 # KDE-style aggressive power management:
@@ -98,10 +92,6 @@ exec_always ~/.config/sway/idle.sh
             natural_scroll enabled
             middle_emulation enabled
     }
-#
-#   input type:keyboard {
-#       xkb_layout "eu"
-#   }
 
     # Hold middle-click (scroll wheel) and move mouse to scroll
     input type:pointer {
@@ -122,8 +112,8 @@ exec_always ~/.config/sway/idle.sh
     # Kill focused window
     bindsym $mod+q kill
 
-    # Start your launcher
-    bindsym $mod+d exec $menu
+    # Start Quickshell Application Launcher
+    bindsym $mod+d exec qs ipc call launcher toggle
 
     # Start the file explorer
     bindsym $mod+e exec $file_explorer
@@ -133,16 +123,13 @@ exec_always ~/.config/sway/idle.sh
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
-    # Despite the name, also works for non-floating windows.
-    # Change normal to inverse to use left mouse button for resizing and right
-    # mouse button for dragging.
     floating_modifier $mod normal
 
     # Reload the configuration file
     bindsym $mod+Shift+c reload
 
-    # Exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+    # Exit sway / Open Quickshell Power Menu
+    bindsym $mod+Shift+e exec qs ipc call power toggle
 #
 # Moving around:
 #
@@ -192,20 +179,20 @@ exec_always ~/.config/sway/idle.sh
     bindsym $mod+Shift+8 move container to workspace number 8
     bindsym $mod+Shift+9 move container to workspace number 9
     bindsym $mod+Shift+0 move container to workspace number 10
-    # Note: workspaces can have any name you want, not just numbers.
-    # We just use 1-10 as the default.
+
+    # Switch workspaces with mouse side buttons (Forward/Back)
+    bindsym --whole-window button9 workspace next_on_output
+    bindsym --whole-window button8 workspace prev_on_output
 #
 # Layout stuff:
 #
-    # You can "split" the current object of your focus with
-    # $mod+b or $mod+v, for horizontal and vertical splits
-    # respectively.
-    # Open Brave Browser
+    # Open Browser
     bindsym $mod+b exec $browser
     bindsym $mod+z exec zeditor
     bindsym $mod+Shift+z exec zeditor -n
-    # Clipboard Manager
-    bindsym $mod+v exec ~/.config/sway/clipse-toggle.sh
+
+    # Quickshell Integrated Clipse Clipboard Picker
+    bindsym $mod+v exec qs ipc call clipboard toggle
 
     # Switch the current container between different layout styles
     bindsym $mod+s layout stacking
@@ -226,22 +213,12 @@ exec_always ~/.config/sway/idle.sh
 # Scratchpad:
 #
     # Sway has a "scratchpad", which is a bag of holding for windows.
-    # You can send windows there and get them back later.
-
-    # Move the currently focused window to the scratchpad
     bindsym $mod+Shift+minus move scratchpad
-
-    # Show the next scratchpad window or hide the focused scratchpad window.
-    # If there are multiple scratchpad windows, this command cycles through them.
     bindsym $mod+minus scratchpad show
 #
 # Resizing containers:
 #
 mode "resize" {
-    # left will shrink the containers width
-    # right will grow the containers width
-    # up will shrink the containers height
-    # down will grow the containers height
     bindsym $left resize shrink width 10px
     bindsym $down resize grow height 10px
     bindsym $up resize shrink height 10px
@@ -259,13 +236,13 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 #
-# Utilities:
+# Utilities & Hardware Controls:
 #
-    # Special keys to adjust volume via PulseAudio
-    bindsym --locked XF86AudioMute exec pactl set-sink-mute \@DEFAULT_SINK@ toggle
-    bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume \@DEFAULT_SINK@ -5%
-    bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume \@DEFAULT_SINK@ +5%
-    bindsym --locked XF86AudioMicMute exec pactl set-source-mute \@DEFAULT_SOURCE@ toggle
+    # Special keys to adjust volume via PulseAudio/PipeWire
+    bindsym --locked XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+    bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+    bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+    bindsym --locked XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
     # Special keys to control media via playerctl
     bindsym --locked XF86AudioPlay exec playerctl play-pause
@@ -274,39 +251,29 @@ bindsym $mod+r mode "resize"
     bindsym --locked XF86AudioNext exec playerctl next
     bindsym --locked XF86AudioStop exec playerctl stop
 
-    # Special keys to adjust brightness via brightnessctl
-    bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
-    bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
-    # Fix for brightness resetting on boot: forcefully re-apply systemd's saved state when Sway starts
-    exec sh -c 'val=$(cat /var/lib/systemd/backlight/* 2>/dev/null | head -n 1); if [ -n "$val" ]; then brightnessctl set "$val" -q; fi'
+    # Special keys to adjust brightness via Quickshell helper
+    bindsym --locked XF86MonBrightnessDown exec ~/.config/quickshell/scripts/brightness.sh step_down 5%
+    bindsym --locked XF86MonBrightnessUp exec ~/.config/quickshell/scripts/brightness.sh step_up 5%
+    # Restore brightness on startup
+    exec ~/.config/quickshell/scripts/brightness.sh restore
 
-    # Special key to take a screenshot with grim
-    # Press Super+Shift+s to drag and select a region, instantly copying it to your clipboard
+    # Screenshots
     bindsym $mod+Shift+s exec ~/.config/sway/screenshot.sh region
-
-    # Press PrintScreen to open the screenshot menu (Full/Region/Window)
-    bindsym Print exec ~/.config/sway/screenshot.sh menu
-    
-    # Press Super+PrintScreen to instantly copy your entire screen to the clipboard
+    bindsym Print exec qs ipc call screenshot toggle
     bindsym $mod+Print exec ~/.config/sway/screenshot.sh full
 
-    # Screen Recording (Start/Stop wf-recorder)
-    bindsym $mod+Shift+r exec ~/.config/sway/toggle_recorder.sh
+    # Screen Recording (Quickshell Recorder Menu)
+    bindsym $mod+Shift+r exec qs ipc call recorder toggle
 
-#
-# Status Bar:
-#
-# Read `man 5 sway-bar` for more information about this section.
-bar {
-    swaybar_command waybar
-}
+    # Quickshell Notification Center Toggle
+    bindsym $mod+n exec qs ipc call notifications toggle
 
-# Notification Center Daemon
+    # Quickshell Emoji Picker
+    bindsym $mod+period exec qs ipc call emoji toggle
 
-exec swaync
+# ── Quickshell Desktop Environment Autostart ──
+exec_always sh -c 'pkill -x qs; pkill -x quickshell; qs'
 
-# Toggle Notification Center Side Panel
-bindsym $mod+n exec swaync-client -t -sw
 # Sync environment variables to D-Bus for GTK apps
 exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
 # Start the Sway session target to satisfy xdg-desktop-portal dependencies for Wayland screensharing
@@ -316,31 +283,15 @@ include /etc/sway/config.d/*
 # Run autotiling to automatically create spiral/dwindle layouts
 exec_always autotiling
 
-
-
-# Network Manager Applet
-exec nm-applet --indicator
-
 # Polkit Authentication Agent (Required for GUI root password prompts)
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
-# Clipse Clipboard Manager
+# Clipse Clipboard Manager Daemon
 exec wl-paste --type text --watch clipse -wl-store
 exec wl-paste --type image --watch clipse -wl-store
 
-# Emoji Picker
-
-
-
-bindsym $mod+period exec ~/.config/sway/rofi-manager.sh emoji
-
-# Golden Ratio / Spiral Tiling
-exec autotiling
-
-# Hardware Notifications (USB & Power)
-
 # --- Idle Inhibition & Media Rules ---
-# Prevent screen sleep while any audio is playing (Requires sway-audio-idle-inhibit package)
+# Prevent screen sleep while any audio is playing
 exec_always sh -c 'pkill -x sway-audio-idle-inhibit; sway-audio-idle-inhibit'
 
 # Automatically prevent screen sleep whenever ANY application goes fullscreen (e.g., YouTube video)
@@ -349,7 +300,5 @@ for_window [app_id=".*"] inhibit_idle fullscreen
 
 # Window Rules
 for_window [app_id="swappy"] floating enable
-
-# Volume Mixer Popup (Pavucontrol)
 for_window [app_id="org.pulseaudio.pavucontrol"] floating enable, resize set width 450 px height 265 px, move position 875 0
 for_window [app_id="clipse"] floating enable, resize set width 800 px height 600 px, move position center

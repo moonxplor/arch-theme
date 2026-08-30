@@ -106,17 +106,17 @@ fi
 log_info "Installing dependencies..."
 PACKAGES=(
     # Core Environment
-    "swayfx" "swaybg" "waybar" "rofi-wayland" "kitty" "thunar" "gvfs" "thunar-volman"
+    "swayfx" "swaybg" "kitty" "thunar" "gvfs" "thunar-volman" "quickshell"
     # Display Manager
     "ly"
     # Audio Stack
     "pipewire" "wireplumber" "pipewire-pulse" "libpulse" "pavucontrol"
     # System/UX Utilities
-    "swayidle" "swaylock" "brightnessctl" "swaync" "wlogout" "polkit-gnome" "network-manager-applet" "sway-audio-idle-inhibit-git" "xdg-desktop-portal" "xdg-desktop-portal-wlr" "jq" "autotiling" "grim" "slurp" "swappy" "playerctl" "imagemagick"
+    "swayidle" "swaylock" "brightnessctl" "polkit-gnome" "sway-audio-idle-inhibit-git" "xdg-desktop-portal" "xdg-desktop-portal-wlr" "jq" "autotiling" "grim" "slurp" "swappy" "playerctl" "imagemagick"
     # Showcase & Terminal Tools
     "wf-recorder" "pipes.sh" "fastfetch" "ddgr"
-    # Clipboard & Emoji
-    "wl-clipboard" "clipse" "rofimoji"
+    # Clipboard & Input
+    "wl-clipboard" "clipse" "wtype"
     # Power & Auth
     "tlp" "gnome-keyring"
     # Default Apps & Shell
@@ -170,7 +170,7 @@ backup_and_symlink() {
 }
 
 # Config directories
-for config in sway swaylock waybar kitty rofi swaync wlogout btop environment.d qt5ct qt6ct tlpui gtk-3.0 gtk-4.0 fontconfig Thunar xfce4 Kvantum swappy fastfetch; do
+for config in quickshell sway swaylock kitty rofi wlogout btop environment.d qt5ct qt6ct tlpui gtk-3.0 gtk-4.0 fontconfig Thunar xfce4 Kvantum swappy fastfetch; do
     backup_and_symlink "$DOTFILES_DIR/$config" "$HOME/.config/$config"
 done
 

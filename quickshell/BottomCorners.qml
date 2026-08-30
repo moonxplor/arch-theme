@@ -1,0 +1,48 @@
+import QtQuick
+import Quickshell
+import Quickshell.Wayland
+import "theme"
+import "components" as Components
+
+PanelWindow {
+    id: root
+    WlrLayershell.namespace: "quickshell"
+    required property var modelData
+    screen: modelData
+
+    anchors.bottom: true
+    anchors.left: true
+    anchors.right: true
+
+    implicitHeight: 13
+    color: "transparent"
+
+    WlrLayershell.layer: WlrLayer.Top
+    WlrLayershell.exclusiveZone: 0
+    WlrLayershell.keyboardFocus: WlrKeyboardFocus.None
+    margins.bottom: 0
+    margins.left: 0
+    margins.right: 0
+
+    mask: Region {
+        Region { item: leftCorner }
+        Region { item: rightCorner }
+    }
+
+    Components.InvertedCorner {
+        id: leftCorner
+        anchors.bottom: parent.bottom
+        anchors.left: parent.left
+        cornerRadius: 13
+        flipVertical: true
+    }
+
+    Components.InvertedCorner {
+        id: rightCorner
+        anchors.bottom: parent.bottom
+        anchors.right: parent.right
+        cornerRadius: 13
+        flipHorizontal: true
+        flipVertical: true
+    }
+}
